@@ -61,12 +61,11 @@
 
         </GroupBox>
 
+        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Margin="5,10,5,10">
+            <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Auto" Padding="5,3,5,3" HorizontalScrollBarVisibility="Auto">
+                <Grid x:Name="LogContainer" VerticalAlignment="Top"/>
+            </ScrollViewer>
+        </GroupBox>
 
-        <RichTextBox x:Name="LogTextBox" Grid.Row="2" Grid.ColumnSpan="2" Margin="5,10,5,10" UseLayoutRounding="True" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Padding="5,5,5,5">
-            <RichTextBox.BorderBrush>
-                <SolidColorBrush Color="Black" Opacity="0.25"/>
-            </RichTextBox.BorderBrush>
-            <FlowDocument></FlowDocument>
-        </RichTextBox>
     </Grid>
 </Window>
