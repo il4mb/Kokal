@@ -1,0 +1,101 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:camp"
+        xmlns:lib="clr-namespace:camp.lib" x:Name="window" x:Class="camp.SettingWindow"
+        mc:Ignorable="d"
+        Title="Setting" Height="400" Width="350" ResizeMode="NoResize">
+
+    <Grid Margin="15,10,15,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" Grid.Column="0" BorderBrush="Transparent">
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                                    <ContentPresenter/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <!-- Set the hover background color here -->
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListViewItem HorizontalContentAlignment="Stretch" Margin="0,0,0,5" Focusable="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="Label_TextEditor" Grid.ColumnSpan="2" Content="Text Editor :"/>
+                    <TextBox x:Name="TextBox_TextEditor" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False"  Padding="5,2,5,2" Margin="5,0,5,5"/>
+                    <Button x:Name="Button_TextEditor" Grid.Row="1" Grid.Column="1" Width="60" Height="25"  Margin="5,0,5,5" HorizontalAlignment="Right" Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/icon/archive.png" Width="16" Height="16"/>
+                        </StackPanel>
+                    </Button>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="8" Padding="8,0,0,0" MaxWidth="260" Text="Select an executable application that supports text editing to use to edit text if needed." TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+                </Grid>
+            </ListViewItem>
+
+            <ListViewItem HorizontalContentAlignment="Stretch" Margin="0,0,0,5" Focusable="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="Label_Browser" Grid.ColumnSpan="2" Content="Browser :"/>
+                    <TextBox x:Name="TextBox_Browser" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="" IsEnabled="False" Padding="5,2,5,2" Margin="5,0,5,5"/>
+                    <Button x:Name="Button_Browser" Grid.Row="1" Grid.Column="1" Width="60" Height="25"  Margin="5,0,5,5" HorizontalAlignment="Right" Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/icon/archive.png" Width="16" Height="16"/>
+                        </StackPanel>
+                    </Button>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="8" Padding="8,0,0,0" MaxWidth="260" Text="If blank, it will use the system default" TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+                </Grid>
+            </ListViewItem>
+        </ListView>
+ 
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button x:Name="Button_Cancel" Width="70" Margin="15,0,0,0" Style="{StaticResource SecondaryButton}">Cancel</Button>
+            <Button x:Name="Button_Save" Width="70" Margin="15,0,0,0" Style="{StaticResource PrimaryButton}">Save</Button>
+        </StackPanel>
+
+    </Grid>
+
+</Window>

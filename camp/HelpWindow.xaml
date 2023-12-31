@@ -1,0 +1,52 @@
+﻿<Window x:Class="camp.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:camp"
+        mc:Ignorable="d"
+        Title="HelpWindow" Height="450" Width="800">
+    <Grid Margin="15,15,15,15">
+
+        <StackPanel Orientation="Vertical">
+            <TextBlock Margin="0,0,0,6">
+                <Run Text="Camp" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="Combine Apache Mysql PHP" FontStyle="Italic"/>
+                <LineBreak/>
+                 <Run Text="Version 1.0 [Windows 64bit] 2023"/>
+            </TextBlock>
+
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Author"/>
+                <TextBlock Grid.Column="1" Text="ILHAM B"/>
+
+                <TextBlock Grid.Row="1" Text="Email"/>
+                <TextBlock Grid.Row="1" Grid.Column="1">
+                    <Hyperlink NavigateUri="mailto:durianbohong@gmail.com">
+                        <Run Text="Durianbohong@gmail.com"/>
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="2" Text="Github"/>
+                <TextBlock Grid.Row="2" Grid.Column="1">
+                    <Hyperlink NavigateUri="http://github.com/il4mb">
+                        <Run Text="Il4mb"/>
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+            
+            <TextBlock Text="Camp Help" FontSize="14" FontWeight="SemiBold"/>
+            
+        </StackPanel>
+    </Grid>
+</Window>
