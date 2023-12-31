@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         x:Class="camp.MainWindow"
         mc:Ignorable="d"
-        Icon="icon/camp.png"
+        Icon="icon.ico"
         Title="Camp Control Panel" MinHeight="400" MinWidth="750" Height="450" Width="800" Background="#FFD5D7E3">
 
     <Grid>
@@ -51,7 +51,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
-            <Image Grid.Column="0" Source="icon/camp.png" Width="45" Height="45"/>
+            <Image Grid.Column="0" Source="{StaticResource ic_camp}" Width="45" Height="45" RenderTransformOrigin="0.5,0.531"/>
 
             <RichTextBox Margin="10,10,0,0" BorderBrush="Transparent" Background="Transparent" Grid.Column="1" IsEnabled="False">
                 <RichTextBox.Document>

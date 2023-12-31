@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Security.Policy;
 using System.Windows;
@@ -16,6 +17,7 @@ namespace camp
 
         public static void OpenEdiText(string filename)
         {
+
             try
             {
                 string? editor = Setting.Get(SettingHelper.EDITOR);
@@ -97,6 +99,16 @@ namespace camp
                 Log.WriteLine($"Error: {e.Message}", Code.Danger);
 
             }
+        }
+
+
+        public static Bitmap? GetImageByName(string imageName)
+        {
+            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+            string resourceName = asm.GetName().Name + ".Properties.Resources";
+            var rm = new System.Resources.ResourceManager(resourceName, asm);
+            return rm.GetObject(imageName) as Bitmap;
+
         }
     }
 

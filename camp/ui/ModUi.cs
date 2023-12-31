@@ -113,17 +113,19 @@ namespace camp.ui
                     }
                 }
 
+
                 var more = new MenuItem()
                 {
                     Header = "advanced option",
                     Icon = new Image
                     {
-                        Source = new BitmapImage(new Uri("C:\\Users\\duria\\source\\repos\\camp\\camp\\icon\\menu.png", UriKind.RelativeOrAbsolute)),
+                        Source = (BitmapImage) App.Current.FindResource("ic_menu"),
                         Width = 16,
                         Height = 10,
                         Margin = new(1, 1, 1, 1)
                     }
                 };
+
 
                 more.Items.Add(new MenuItem() { Header = "Reinstall" });
                 more.Items.Add(new MenuItem() { Header = "Delete" });

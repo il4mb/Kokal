@@ -6,19 +6,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <StartupObject></StartupObject>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="icon.ico" />
-    <None Remove="icon\archive.png" />
-    <None Remove="icon\camp.png" />
-    <None Remove="icon\file.png" />
-    <None Remove="icon\menu.png" />
-    <None Remove="icon\setting.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +21,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="icon\archive.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="icon\camp.png" />
+	  
+    <Resource Include="icon\camp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+	  
     <Resource Include="icon\file.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -41,12 +41,6 @@
     <Resource Include="icon\setting.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="NetstatWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ButtonStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <BitmapImage x:Key="ic_archive" UriSource="icon\archive.png"/>
+            <BitmapImage x:Key="ic_camp" UriSource="icon\camp.png"/>
+            <BitmapImage x:Key="ic_file" UriSource="icon\file.png"/>
+            <BitmapImage x:Key="ic_menu" UriSource="icon\menu.png"/>
+            <BitmapImage x:Key="ic_setting" UriSource="icon\setting.png"/>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
