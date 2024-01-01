@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace camp.lib
 {
@@ -28,6 +29,8 @@ namespace camp.lib
         public abstract List<MenuOption>? GetMenuOpts();
 
         public abstract void OnMenuItemClicked(int code, int position);
+
+        public abstract BitmapImage GetIcon();
 
         public string GetPath()
         {

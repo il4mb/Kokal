@@ -1,6 +1,7 @@
 ﻿using camp.lib;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace camp.module
 {
@@ -20,6 +21,11 @@ namespace camp.module
         {
             App.OpenBrowser("http://localhost");
 
+        }
+
+        public override BitmapImage GetIcon()
+        {
+           return (BitmapImage)App.Current.FindResource("ic_apache");
         }
 
         public override List<MenuOption>? GetMenuOpts()

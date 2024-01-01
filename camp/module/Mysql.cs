@@ -1,6 +1,7 @@
 ﻿using camp.lib;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace camp.module
 {
@@ -19,6 +20,11 @@ namespace camp.module
         public override void AdminNavigate()
         {
             App.OpenBrowser("http://localhost/phpmyadmin");
+        }
+
+        public override BitmapImage GetIcon()
+        {
+            return (BitmapImage)App.Current.FindResource("ic_mysql");
         }
 
         public override List<MenuOption>? GetMenuOpts()

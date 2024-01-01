@@ -47,14 +47,11 @@ namespace camp
 
         private void InitialViewComponent()
         {
-            this.Button_Cancel.Click += (s, e) => {
+            this.Button_Reset.Click += (s, e) => {
 
-                string oldTextEdt = Setting.Get(SettingHelper.EDITOR) ?? "";
-                string oldBrowser = Setting.Get(SettingHelper.BROWSER) ?? "";
-
-                if(oldTextEdt.Equals(set_editor) && oldBrowser.Equals(set_browser)) {
-                    this.Close();
-                    return;                }
+                Setting.Set(SettingHelper.EDITOR, "notepad");
+                Setting.Set(SettingHelper.BROWSER, "");
+           
                 LoadLastSetting();
             };
             this.Button_Save.Click += (s, e) => {

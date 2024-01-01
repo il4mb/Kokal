@@ -13,7 +13,7 @@ namespace camp.ui
 
     public class ModUi : IModWatcher
     {
-        public Label ServiceLabel { get; }
+        public Image ModuleIcon { get; }
         public Label NameLabel { get; }
         public Label PidsLabel { get; }
         public Label PortsLabel { get; }
@@ -29,14 +29,19 @@ namespace camp.ui
             module.SetModWacher(this);
 
 
-            ServiceLabel = CreateLabel("", HorizontalAlignment.Left);
+            ModuleIcon = new Image()
+            {
+                Width = 20,
+                Height = 20,
+                Source = module.GetIcon()
+            };
             NameLabel = CreateLabel(module.GetName(), HorizontalAlignment.Left);
             PidsLabel = CreateLabel("", HorizontalAlignment.Left);
             PortsLabel = CreateLabel("", HorizontalAlignment.Right);
             ModUiControl = new ModUiControl();
 
 
-            List<UIElement> uIElements = [ServiceLabel, NameLabel, PidsLabel, PortsLabel, ModUiControl];
+            List<UIElement> uIElements = [ModuleIcon, NameLabel, PidsLabel, PortsLabel, ModUiControl];
             imc.GetParentHolder().RowDefinitions.Add(new RowDefinition());
             for (int i = 0; i < uIElements.Count; i++)
             {
@@ -289,7 +294,7 @@ namespace camp.ui
             AdminBtn = new Button() { Content = "Admin" };
             LogsBtn = new Button() { Content = "Log" };
 
-            uIElements = [ToggleBtn, AdminBtn, ConfigBth, LogsBtn];
+            uIElements = [ToggleBtn, AdminBtn, ConfigBth];
 
 
             RowDefinitions.Add(new RowDefinition());

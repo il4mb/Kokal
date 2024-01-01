@@ -92,7 +92,7 @@
         </ListView>
  
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button x:Name="Button_Cancel" Width="70" Margin="15,0,0,0" Style="{StaticResource SecondaryButton}">Cancel</Button>
+            <Button x:Name="Button_Reset" Width="70" Margin="15,0,0,0" Style="{StaticResource DangerButton}">Reset</Button>
             <Button x:Name="Button_Save" Width="70" Margin="15,0,0,0" Style="{StaticResource PrimaryButton}">Save</Button>
         </StackPanel>
 

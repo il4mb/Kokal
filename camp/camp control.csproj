@@ -14,7 +14,10 @@
   <ItemGroup>
     <None Remove="camp control.ico" />
     <None Remove="icon.ico" />
+    <None Remove="icon\apache.png" />
+    <None Remove="icon\apache.svg" />
     <None Remove="icon\camp control.png" />
+    <None Remove="icon\mysql.png" />
     <None Remove="icon\resize.png" />
   </ItemGroup>
 
@@ -28,6 +31,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="icon\apache.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon\archive.png">
@@ -45,6 +51,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="icon\mysql.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon\resize.png">
