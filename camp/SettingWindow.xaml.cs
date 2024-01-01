@@ -5,16 +5,11 @@ using System.Windows;
 namespace camp
 {
 
-
-
-
     public partial class SettingWindow : Window
     {
 
-
         string set_editor = "";
         string set_browser = "";
-
 
         public SettingWindow()
         {

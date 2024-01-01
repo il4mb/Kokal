@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -17,7 +18,7 @@ namespace camp.ui
         public Label PidsLabel { get; }
         public Label PortsLabel { get; }
         public ModUiControl ModUiControl { get; }
-        private  ModUiTray? _ModUiTray { get; }
+        private ModUiTray? _ModUiTray { get; }
         public Module Module { get; }
 
         private ModUi(Module module, IModContainer imc)
@@ -46,6 +47,13 @@ namespace camp.ui
                 Grid.SetRow(el, imc.GetParentHolder().RowDefinitions.Count - 1);
             }
 
+
+            if (imc.GetTrayHolder() != null)
+            {
+                _ModUiTray = new ModUiTray(module, imc.GetTrayHolder());
+            }
+
+
             ModUiControl.ToggleBtn.IsEnabled = false;
             ModUiControl.AdminBtn.IsEnabled = false;
 
@@ -53,28 +61,28 @@ namespace camp.ui
             ModUiControl.AdminBtn.Click += (s, e) => module.AdminNavigate();
             ModUiControl.ToggleBtn.Click += (s, e) =>
             {
-                
+
                 module.Toggle();
             };
-
-
-            if(imc.GetTrayHolder() != null)
-            {
-                _ModUiTray = new ModUiTray(module, imc.GetTrayHolder());
-            }
-
 
             if (module.IsComponentOkay())
             {
                 Log.WriteLine("ModUi", $"Module {module.GetName()} loaded successful, version {module.GetVersion()}");
                 ModUiControl.ToggleBtn.IsEnabled = true;
 
+                if (_ModUiTray != null) {
+                    _ModUiTray.ActionBtn.IsEnabled = true;
+                }
+
             }
             else
             {
 
-                Log.WriteLine($"Module {module.GetName()} cannot load!, Some components of the module may be corrupt.");
+                Log.WriteLine($"Module {module.GetName()} cannot load!, Some components of the module may be corrupt.", Code.Warning);
                 ModUiControl.ToggleBtn.IsEnabled = false;
+                if(_ModUiTray != null) {
+                    _ModUiTray.ActionBtn.IsEnabled = false;
+                }
 
             }
 
@@ -119,17 +127,43 @@ namespace camp.ui
                     Header = "advanced option",
                     Icon = new Image
                     {
-                        Source = (BitmapImage) App.Current.FindResource("ic_menu"),
+                        Source = (BitmapImage)App.Current.FindResource("ic_menu"),
                         Width = 16,
                         Height = 10,
                         Margin = new(1, 1, 1, 1)
                     }
                 };
 
-
-                more.Items.Add(new MenuItem() { Header = "Reinstall" });
-                more.Items.Add(new MenuItem() { Header = "Delete" });
+                var reinstall = new MenuItem() { Header = "Reinstall" };
+                more.Items.Add(reinstall);
                 contextMenu.Items.Add(more);
+                reinstall.Click += (s, e) =>
+                {
+                    new Thread(async (t) =>
+                    {
+
+                        Thread.CurrentThread.IsBackground = true;
+
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            Mouse.OverrideCursor = Cursors.Wait;
+                            ModUiControl.ToggleBtn.IsLoading = true;
+                            ModUiControl.ToggleBtn.IsEnabled = false;
+                            ModUiControl.AdminBtn.IsEnabled = false;
+                        });
+
+                        await Module.Install();
+
+                        Application.Current?.Dispatcher.Invoke(() =>
+                        {
+                            Mouse.OverrideCursor = null;
+                            ModUiControl.ToggleBtn.IsLoading = false;
+                            ModUiControl.ToggleBtn.IsEnabled = true;
+                            ModUiControl.AdminBtn.IsEnabled = true;
+                        });
+
+                    }).Start();
+                };
 
                 // Set the context menu for the button
                 btn.ContextMenu = contextMenu;
@@ -162,7 +196,7 @@ namespace camp.ui
 
         public void OnToggle()
         {
-            if(_ModUiTray != null)
+            if (_ModUiTray != null)
             {
                 _ModUiTray.ActionBtn.IsEnabled = false;
                 _ModUiTray.ActionBtn.IsLoading = true;
@@ -170,7 +204,7 @@ namespace camp.ui
 
             this.ModUiControl.ToggleBtn.IsEnabled = false;
             this.ModUiControl.ToggleBtn.IsLoading = true;
-            
+
             Debug.WriteLine("Toggle is click");
         }
 
@@ -197,7 +231,7 @@ namespace camp.ui
             ModUiControl.ToggleBtn.IsEnabled = true;
             ModUiControl.AdminBtn.IsEnabled = true;
 
-            if(_ModUiTray != null)
+            if (_ModUiTray != null)
             {
                 _ModUiTray.AdminBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsEnabled = true;
@@ -231,7 +265,7 @@ namespace camp.ui
             }
 
         }
-    
+
     }
 
 
@@ -418,7 +452,7 @@ namespace camp.ui
         }
     }
 
-    
+
 
     public class ModUiTray
     {
@@ -436,7 +470,7 @@ namespace camp.ui
 
             UIElement[] elms = [NameLabel, ActionBtn, AdminBtn];
 
-            for(int i = 0; i < elms.Length; i++)
+            for (int i = 0; i < elms.Length; i++)
             {
 
                 container.Children.Add(elms[i]);

@@ -6,18 +6,28 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace camp.ui
 {
+    public delegate Task EventExit();
+
     internal class ModContainer(IModContainer imc)
     {
 
         public void InitialModule()
         {
+            lib.Module[] modules = [
+                new Apache(),
+                new Mysql()
+            ];
 
-            ModUi.NewInstance(new Apache(), imc);
-            ModUi.NewInstance(new Mysql(), imc);
+            foreach(lib.Module mod in modules)
+            {
+                ModUi.NewInstance(mod, imc);
+                imc.Exited += mod.KillAsync;
+            }
 
         }
     }
@@ -27,6 +37,8 @@ namespace camp.ui
         public Grid GetParentHolder();
 
         public Grid? GetTrayHolder();
+
+        public event EventExit Exited;
 
     }
 }

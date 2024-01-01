@@ -1,10 +1,7 @@
 ﻿using camp.lib;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Security.Policy;
 using System.Windows;
 
 namespace camp
@@ -42,12 +39,15 @@ namespace camp
                         UseShellExecute = true,
                     });
                 }
-            } catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Log.WriteLine($"Error: {ex.Message}", Code.Danger);
             }
         }
 
-        public static void OpenBrowser(string url) {
+        public static void OpenBrowser(string url)
+        {
 
             try
             {
@@ -72,7 +72,8 @@ namespace camp
                         UseShellExecute = true,
                     });
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Log.WriteLine($"Error: {e.Message}", Code.Danger);
             }
@@ -83,7 +84,7 @@ namespace camp
         {
             try
             {
-                if(!Directory.Exists(path))
+                if (!Directory.Exists(path))
                 {
                     throw new Exception($"Cant open explorer, path not exist {path}");
                 }
@@ -94,7 +95,8 @@ namespace camp
                     UseShellExecute = true
                 });
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Log.WriteLine($"Error: {e.Message}", Code.Danger);
 

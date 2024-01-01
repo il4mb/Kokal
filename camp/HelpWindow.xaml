@@ -14,6 +14,11 @@
                 <Run Text="Combine Apache Mysql PHP" FontStyle="Italic"/>
                 <LineBreak/>
                  <Run Text="Version 1.0 [Windows 64bit] 2023"/>
+                <LineBreak/>
+                <TextBlock>
+                    <Run Text="Github Project"/>
+                    <Hyperlink NavigateUri="https://github.com/il4mb/camp" RequestNavigate="Hyperlink_RequestNavigate">https://github.com/il4mb/camp</Hyperlink>
+                </TextBlock>
             </TextBlock>
 
             <Grid Margin="0,0,0,10">
@@ -32,21 +37,31 @@
 
                 <TextBlock Grid.Row="1" Text="Email"/>
                 <TextBlock Grid.Row="1" Grid.Column="1">
-                    <Hyperlink NavigateUri="mailto:durianbohong@gmail.com">
-                        <Run Text="Durianbohong@gmail.com"/>
+                    <Hyperlink NavigateUri="mailto:durianbohong@gmail.com" RequestNavigate="Hyperlink_RequestNavigate">
+                        Durianbohong@gmail.com
                     </Hyperlink>
                 </TextBlock>
 
                 <TextBlock Grid.Row="2" Text="Github"/>
                 <TextBlock Grid.Row="2" Grid.Column="1">
-                    <Hyperlink NavigateUri="http://github.com/il4mb">
-                        <Run Text="Il4mb"/>
+                    <Hyperlink NavigateUri="http://github.com/il4mb" RequestNavigate="Hyperlink_RequestNavigate">
+                        Il4mb
                     </Hyperlink>
                 </TextBlock>
             </Grid>
             
-            <TextBlock Text="Camp Help" FontSize="14" FontWeight="SemiBold"/>
-            
         </StackPanel>
+
+        <TextBlock Text="Open Joki Juga Don't Panic" Foreground="Red" FontSize="30" FontWeight="Black" Opacity="0.1" RenderTransformOrigin="0.5,0.5" Width="466" Height="48">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-26.565"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Image Source="{StaticResource ic_camp_control}" Width="200" Height="200" Opacity="0.1"/>
     </Grid>
 </Window>

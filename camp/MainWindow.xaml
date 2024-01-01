@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         x:Class="camp.MainWindow"
         mc:Ignorable="d"
-        Icon="icon.ico"
+        Icon="camp control.ico"
         Title="Camp Control Panel" MinHeight="400" MinWidth="750" Height="450" Width="800" Background="#FFD5D7E3">
 
     <Grid>
@@ -20,6 +20,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+
 
         <!-- Block Rightbar -->
         <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" Margin="15,40,0,0" VerticalAlignment="Top" Height="175">
@@ -51,7 +52,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
-            <Image Grid.Column="0" Source="{StaticResource ic_camp}" Width="45" Height="45" RenderTransformOrigin="0.5,0.531"/>
+            <Image Grid.Column="0" Source="{StaticResource ic_camp_control}" Width="45" Height="45" RenderTransformOrigin="0.5,0.531"/>
 
             <RichTextBox Margin="10,10,0,0" BorderBrush="Transparent" Background="Transparent" Grid.Column="1" IsEnabled="False">
                 <RichTextBox.Document>
@@ -110,16 +111,43 @@
                         Visibility="Visible">
 
             <tb:TaskbarIcon.TrayPopup>
-                <Popup StaysOpen="False" Placement="MousePoint" PopupAnimation="Slide" Width="250">
+                <Popup x:Name="NotifyPopup" StaysOpen="False" Placement="MousePoint" PopupAnimation="Slide" Width="250">
 
                     <Border BorderBrush="Black" BorderThickness="1" Background="White" Padding="15,10,15,10">
 
                         <StackPanel Orientation="Vertical">
 
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                                <Image Source="icon.ico" Width="16" Height="16"/>
-                                <TextBlock Margin="5,7,0,0" Text="Camp Mini Control" FontSize="14" FontWeight="SemiBold"/>
-                            </StackPanel>
+                            <Grid VerticalAlignment="Bottom" Margin="0,0,0,10">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Image Grid.Column="0" Source="icon.ico" Width="16" Height="16"/>
+                                <TextBlock Grid.Column="1" Margin="5,7,0,0" Text="Camp Mini Control" FontSize="14" FontWeight="SemiBold"/>
+
+                                <Button Grid.Column="2" Background="#eaeaea" BorderBrush="#999999f9" 
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="30" Height="21"
+                                        Click="Button_Expand_Click">
+                                    <Button.Content>
+                                        <StackPanel>
+                                            <Image Source="{StaticResource ic_resize}" Width="15" Height="15" RenderTransformOrigin="0.5,0.5">
+                                                <Image.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleX="-1"/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </StackPanel>
+                                    </Button.Content>
+                                    <Button.ToolTip>Expand</Button.ToolTip>
+                                </Button>
+                            </Grid>
 
                             <Grid x:Name="TrayModuleLayout">
 

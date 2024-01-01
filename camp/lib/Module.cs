@@ -43,8 +43,6 @@ namespace camp.lib
             return this.ModulePaths;
         }
 
-
-
         public void SetModWacher(IModWatcher modWatcher)
         {
             this.ModWatcher = modWatcher;
@@ -146,7 +144,7 @@ namespace camp.lib
 
         }
 
-  
+
         private void Stop(RunInfo runInfo)
         {
 
@@ -170,7 +168,6 @@ namespace camp.lib
             }
 
 
-
             Log.WriteLine(GetName(), $"Process has been stoped", Code.Warning);
             Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnStopPerfomed()); // Event dispatcher
 
@@ -188,12 +185,76 @@ namespace camp.lib
 
         private void OnProcExited(object? sender, EventArgs args)
         {
-
-            Log.WriteLine(GetName(), $"Process has been stoped", Code.Warning);
-            Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnStopPerfomed()); // Event dispatcher
-
+            try
+            {
+                Log.WriteLine(GetName(), $"Process has been stoped", Code.Warning);
+                Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnStopPerfomed()); // Event dispatcher
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error: {ex}");
+            }
         }
 
+
+        public async Task Install()
+        {
+            try
+            {
+
+                Log.WriteLine(GetName(), $"Traying reinstall module...");
+
+                if(!File.Exists(GetModulePaths().Install))
+                {
+                    throw new Exception($"Cannot find module installer!");
+                }
+
+                string command = $"/c {GetModulePaths().Install}";
+                Process proc = new()
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = "cmd.exe",
+                        Arguments = command,
+                        CreateNoWindow = true,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        RedirectStandardInput = true,
+                    }
+                };
+
+                proc.ErrorDataReceived += (s, e) =>
+                {
+                    throw new Exception(e.Data);
+                };
+
+
+                proc.Start();
+
+                await proc.WaitForExitAsync();
+
+                Log.WriteLine(GetName(), $"Installation module complete!", Code.Suceess);
+
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLine(GetName(), $"Error: {ex.Message}", Code.Danger);
+            }
+        }
+
+        public async Task KillAsync()
+        {
+
+            Debug.WriteLine($"{GetName()} Kill");
+
+            RunInfo? runInfo = await GetRunInfo();
+            if (runInfo != null && !string.IsNullOrEmpty(runInfo.pid))
+            {
+                Stop(runInfo);
+            }
+
+        }
 
         public Task<RunInfo?> GetRunInfo()
         {
@@ -268,7 +329,7 @@ namespace camp.lib
         public ModulePaths(string? path)
         {
 
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
             {
                 Controller = FindRealPath("*module-controller*.exe", path);
                 Info = FindRealPath("*module-info*.exe", path);

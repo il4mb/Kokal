@@ -70,6 +70,12 @@ namespace camp.module
         public override bool IsComponentOkay()
         {
 
+            if(!Directory.Exists(GetPath()))
+            {
+                Log.WriteLine($"Cannot find {GetName()}", Code.Danger);
+                return false;
+            }
+
             ModulePaths ModPaths = GetModulePaths();
 
             string[] paths = [

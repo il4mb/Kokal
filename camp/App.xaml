@@ -14,6 +14,8 @@
             <BitmapImage x:Key="ic_file" UriSource="icon\file.png"/>
             <BitmapImage x:Key="ic_menu" UriSource="icon\menu.png"/>
             <BitmapImage x:Key="ic_setting" UriSource="icon\setting.png"/>
+            <BitmapImage x:Key="ic_resize" UriSource="icon\resize.png"/>
+            <BitmapImage x:Key="ic_camp_control" UriSource="icon\camp control.png"/>
             
         </ResourceDictionary>
     </Application.Resources>

@@ -13,8 +13,12 @@ namespace camp
     {
 
         private ModContainer ModContainer;
+
+        public event EventExit Exited;
+
         public string Camp_Title { get; set; } = "Camp Control Panel";
         public string Camp_Version { get; set; } = "Version 1.0";
+        private bool IsKill = false;
 
 
         public MainWindow()
@@ -30,10 +34,9 @@ namespace camp
             this.ModContainer.InitialModule();
 
             Loaded += MainWindow_Loaded;
+            Closed += (s, e) => Exited?.Invoke();
 
         }
-
-
 
         public Grid GetParentHolder()
         {
@@ -50,7 +53,7 @@ namespace camp
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            NotifyIcon.Visibility = Visibility.Visible;
+            NotifyIcon.Visibility = Visibility.Hidden;
         }
 
         private void ShowWindow(object sender, RoutedEventArgs e)
@@ -63,7 +66,7 @@ namespace camp
         private void ExitApplication(object sender, RoutedEventArgs e)
         {
             // Cleanup and exit the application
-            NotifyIcon.Visibility = Visibility.Collapsed;
+            NotifyIcon.Visibility = Visibility.Visible;
             Application.Current.Shutdown();
         }
 
@@ -78,12 +81,18 @@ namespace camp
             base.OnStateChanged(e);
         }
 
+
         // Override OnClosing event to prevent the main window from being closed
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
-            base.OnClosing(e);
-            this.Hide(); // Hide instead of closing
+
+            if (!IsKill)
+            {
+                e.Cancel = true;
+                base.OnClosing(e);
+                this.Hide(); // Hide instead of closing
+                NotifyIcon.Visibility = Visibility.Visible;
+            }
         }
 
 
@@ -125,7 +134,21 @@ namespace camp
 
         private void Button_Quit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+
+            new Thread(async t =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                await Exited.Invoke();
+                IsKill = true;
+                Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
+            }).Start();
+        }
+
+        private void Button_Expand_Click(object sender, RoutedEventArgs e)
+        {
+            this.Show();
+            NotifyIcon.Visibility = Visibility.Hidden;
+            NotifyPopup.IsOpen = false;
         }
     }
 }

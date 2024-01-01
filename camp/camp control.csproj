@@ -8,23 +8,32 @@
     <UseWPF>true</UseWPF>
     <StartupObject></StartupObject>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="camp control.ico" />
     <None Remove="icon.ico" />
+    <None Remove="icon\camp control.png" />
+    <None Remove="icon\resize.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="Hardcodet.Wpf.TaskbarNotification" Version="1.0.5" />
-    <PackageReference Include="YamlDotNet" Version="13.7.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="camp control.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="icon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon\archive.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="icon\camp control.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
 	  
@@ -36,6 +45,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon\menu.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="icon\resize.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon\setting.png">
