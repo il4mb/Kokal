@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
         x:Class="camp.MainWindow"
         mc:Ignorable="d"
-        Icon="camp control.ico"
+    
+        Icon="{StaticResource ic_camp_control}"
         Title="Camp Control Panel" MinHeight="400" MinWidth="750" Height="450" Width="800" Background="#FFD5D7E3">
 
     <Grid>
@@ -124,7 +126,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="35"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Image Grid.Column="0" Source="icon.ico" Width="16" Height="16"/>
                                 <TextBlock Grid.Column="1" Margin="5,7,0,0" Text="Camp Mini Control" FontSize="14" FontWeight="SemiBold"/>
 
@@ -156,7 +158,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
@@ -172,5 +174,7 @@
             </tb:TaskbarIcon.TrayPopup>
         </tb:TaskbarIcon>
         
+        <!-- Block Notification -->
+        <notifications:NotificationArea x:Name="WindowArea" Position="TopLeft" MaxItems="3"/>
     </Grid>
 </Window>

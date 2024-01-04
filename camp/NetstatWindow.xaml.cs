@@ -34,6 +34,7 @@ namespace camp
             Closed += (s, e) =>
             {
                 timer.Stop();
+                Mouse.OverrideCursor = Cursors.Arrow;
             };
         }
 

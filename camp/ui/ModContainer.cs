@@ -1,12 +1,4 @@
-﻿using camp.lib;
-using camp.module;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using camp.module;
 using System.Windows.Controls;
 
 namespace camp.ui

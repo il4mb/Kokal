@@ -24,6 +24,7 @@
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="Hardcodet.Wpf.TaskbarNotification" Version="1.0.5" />
+    <PackageReference Include="Notification.Wpf" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

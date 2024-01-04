@@ -1,8 +1,8 @@
 ﻿<Application x:Class="camp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:camp"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             Startup="AppOnStartup">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -1,8 +1,11 @@
 ﻿using camp.lib;
 using camp.ui;
+using Notification.Wpf;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace camp
 {
@@ -12,7 +15,7 @@ namespace camp
     public partial class MainWindow : Window, IModContainer
     {
 
-        private ModContainer ModContainer;
+        private static ModContainer ModContainer;
 
         public event EventExit Exited;
 
@@ -20,23 +23,29 @@ namespace camp
         public string Camp_Version { get; set; } = "Version 1.0";
         private bool IsKill = false;
 
+        NotificationManager notificationManager;
 
         public MainWindow()
         {
 
             InitializeComponent();
+
             this.DataContext = this;
 
             Log.Current.SetLogView(new LogView(this.LogContainer));
             Log.WriteLine($"Camp Control Panel {Camp_Version}");
 
-            this.ModContainer = new(this);
-            this.ModContainer.InitialModule();
+            if (ModContainer == null)
+            {
+                ModContainer = new(this);
+                ModContainer.InitialModule();
+            }
 
+            notificationManager = new NotificationManager();
             Loaded += MainWindow_Loaded;
-            Closed += (s, e) => Exited?.Invoke();
 
         }
+
 
         public Grid GetParentHolder()
         {
@@ -55,21 +64,6 @@ namespace camp
         {
             NotifyIcon.Visibility = Visibility.Hidden;
         }
-
-        private void ShowWindow(object sender, RoutedEventArgs e)
-        {
-            // Show or activate your main window
-            this.Show();
-            this.WindowState = WindowState.Normal;
-        }
-
-        private void ExitApplication(object sender, RoutedEventArgs e)
-        {
-            // Cleanup and exit the application
-            NotifyIcon.Visibility = Visibility.Visible;
-            Application.Current.Shutdown();
-        }
-
 
         // Override the OnStateChanged method to minimize to system tray when the window is minimized
         protected override void OnStateChanged(EventArgs e)
@@ -92,7 +86,28 @@ namespace camp
                 base.OnClosing(e);
                 this.Hide(); // Hide instead of closing
                 NotifyIcon.Visibility = Visibility.Visible;
+                notificationManager.Show("Camp Control Panel", "Enter system tray mode!\nClick here to reopen.", NotificationType.Information, onClick: BringToForeground);
             }
+        }
+
+        /// <summary>Brings main window to foreground.</summary>
+        public void BringToForeground()
+        {
+            NotifyIcon.Visibility = Visibility.Hidden;
+
+            if (this.WindowState == WindowState.Minimized || this.Visibility == Visibility.Hidden)
+            {
+                this.Show();
+                this.WindowState = WindowState.Normal;
+            }
+
+            // According to some sources these steps gurantee that an app will be brought to foreground.
+            this.Activate();
+            this.Topmost = true;
+            this.Topmost = false;
+            this.Focus();
+
+            notificationManager.Show("Camp Control Panel", "The instance is already running, Reloading the previous instance!", NotificationType.Warning);
         }
 
 
@@ -118,9 +133,7 @@ namespace camp
 
         private void Button_Explorer_Click(object sender, RoutedEventArgs e)
         {
-
             App.OpenExplorer(Directory.GetCurrentDirectory());
-
         }
 
         private void Button_Help_Click(object sender, RoutedEventArgs e)
@@ -140,7 +153,7 @@ namespace camp
                 Thread.CurrentThread.IsBackground = true;
                 await Exited.Invoke();
                 IsKill = true;
-                Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
+                System.Windows.Application.Current.Dispatcher.Invoke(() => System.Windows.Application.Current.Shutdown());
             }).Start();
         }
 
