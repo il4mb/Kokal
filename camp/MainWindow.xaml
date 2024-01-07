@@ -4,57 +4,180 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
-        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf" 
+        xmlns:local="clr-namespace:camp.lib"
         x:Class="camp.MainWindow"
         mc:Ignorable="d"
-    
-        Icon="{StaticResource ic_camp_control}"
-        Title="Camp Control Panel" MinHeight="400" MinWidth="750" Height="450" Width="800" Background="#FFD5D7E3">
+        Icon="{StaticResource ic_icon}"
+        Title="Camp Control Panel" 
+        MinHeight="400" 
+        MinWidth="750" 
+        Height="450" 
+        Width="800" 
+        Background="#FFD5D7E3">
 
     <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1*" MaxWidth="300"/>
+            <ColumnDefinition Width="1*" MaxWidth="175"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*" MaxHeight="100"/>
+            <RowDefinition Height="2*" MaxHeight='200'/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
 
         <!-- Block Rightbar -->
-        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="15,40,0,0" VerticalAlignment="Top" Height="175" MaxWidth="300">
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="15,15,0,0" VerticalAlignment="Stretch" MaxWidth="300">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition MaxWidth="150"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition MaxHeight="40"/>
+                <RowDefinition MaxHeight="40"/>
+                <RowDefinition MaxHeight="40"/>
+                <RowDefinition MaxHeight="40"/>
+                <RowDefinition MaxHeight="40"/>
+                <RowDefinition MaxHeight="40"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Content="Setting" Click="Button_Setting_Click"/>
-            <Button Grid.Row="1" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Content="Netstat" Click="Button_Netstat_Click"/>
-            <Button Grid.Row="2" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Content="Explorer" Click="Button_Explorer_Click"/>
-            <Button Grid.Row="3" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Content="Help" Click="Button_Help_Click"/>
-            <Button Grid.Row="4" Margin="0,0,8,8" Style="{StaticResource DangerButton}" Content="Quit" Click="Button_Quit_Click"/>
+            <Button Grid.Row="0" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Click="Button_Setting_Click">
+
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="white"/>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="icon/settings.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="white" Content="Setting"/>
+                    </Grid>
+                </Button.Content>
+
+            </Button>
+            <Button Grid.Row="1" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Click="Button_Netstat_Click">
+
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="white"/>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="icon/global-network.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="white" Content="Netstat"/>
+                    </Grid>
+                </Button.Content>
+
+            </Button>
+            <Button Grid.Row="2" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Click="Button_Explorer_Click">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="white"/>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="icon/folder.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="White" Content="Explorer"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <!--
+            <Button Grid.Row="3" Margin="0,0,8,8" Style="{StaticResource PrimaryButton}" Click="Button_Explorer_Click">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="white"/>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="{StaticResource ic_folder_globe}"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="White" Content="Htdocs"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            -->
+            <Button Grid.Row="4" Margin="0,0,8,8" Style="{StaticResource SecondaryButton}" Click="Button_Help_Click">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="20" Height="20" HorizontalAlignment="Right">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="white"/>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="icon/conversation.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="White" Content="Help"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="button" Grid.Row="5" Margin="0,0,8,8" Style="{StaticResource DangerButton}" Click="Button_Quit_Click">
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=button, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="white"/>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="icon/stop.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="White" Content="Exit"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
         </Grid>
 
 
         <!-- Block App -->
-        <Grid Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Grid Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <Image Grid.Column="0" Source="{StaticResource ic_camp_control}" Width="45" Height="45" RenderTransformOrigin="0.5,0.531"/>
+
+            <Image Grid.Column="0" Source="camp.ico" Width="65" Height="55" RenderTransformOrigin="0.5,0.531"/>
 
             <RichTextBox Margin="10,10,0,0" BorderBrush="Transparent" Background="Transparent" Grid.Column="1" IsEnabled="False">
                 <RichTextBox.Document>
@@ -64,15 +187,41 @@
                                 <Run FontSize="18" Text="Camp Control Panel"/>
                             </Bold>
                             <LineBreak/>
-                            <Run Text="Version 1.0 [Windows 64bit] 2023"/>
+                            <Run Text="{Binding BuildVersion}"/>
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox.Document>
             </RichTextBox>
-            
+
+            <Button x:Name="SupportBtn" Grid.Column="2" Width="110" Height="32" Style="{StaticResource PrimaryOutlineButton}" Click="Button_Support_Click">
+                <Button.Resources>
+                    <local:ForegroundColorConverter x:Key="ForegroundColorConverter"/>
+                </Button.Resources>
+                <Button.Content>
+                    <Grid Width="{Binding ActualWidth, ElementName=SupportBtn, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right" Margin="0,0,2,0">
+                            <Rectangle.Fill>
+                                <MultiBinding Converter="{StaticResource ForegroundColorConverter}">
+                                    <Binding Path="Foreground" ElementName="SupportBtn"/>
+                                    <!-- You can add more bindings if needed -->
+                                </MultiBinding>
+                            </Rectangle.Fill>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="icon/day.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <Label Grid.Column="1" Foreground="{Binding Foreground, ElementName=SupportBtn}" Content="Support"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+
         </Grid>
-      
-        
+
+
         <!-- Block Module -->
         <GroupBox Grid.Row="1" Header="Module" Margin="5,4,5,19" Background="#FFC8CAD4">
 
@@ -85,7 +234,7 @@
                     <ColumnDefinition Width="260"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*" MinHeight="30"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Content="" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -98,13 +247,13 @@
 
         </GroupBox>
 
-        
+
         <!-- Block Logs -->
         <RichTextBox Grid.Row="2" Grid.ColumnSpan="2" Padding="5,10,5,10" Background="White"  x:Name="LogContainer">
             <FlowDocument/>
         </RichTextBox>
-        
-        
+
+
         <!-- Block NotifyIcon -->
         <tb:TaskbarIcon x:Name="NotifyIcon"
                         IconSource="icon.ico"
@@ -173,7 +322,7 @@
                 </Popup>
             </tb:TaskbarIcon.TrayPopup>
         </tb:TaskbarIcon>
-        
+
         <!-- Block Notification -->
         <notifications:NotificationArea x:Name="WindowArea" Position="TopLeft" MaxItems="3"/>
     </Grid>

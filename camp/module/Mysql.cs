@@ -19,7 +19,13 @@ namespace camp.module
 
         public override void AdminNavigate()
         {
-            App.OpenBrowser("http://localhost/phpmyadmin");
+            string? apachePort = "";
+            var apache = Apache.GetInstance();
+            if(apache != null && apache.LastRunInfo != null) {
+                apachePort = apache.LastRunInfo.port;
+            }
+
+            App.OpenBrowser($"http://localhost{(!string.IsNullOrEmpty(apachePort) ? ":" + apachePort : "")}/phpmyadmin");
         }
 
         public override BitmapImage GetIcon()

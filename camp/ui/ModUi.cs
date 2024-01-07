@@ -271,6 +271,50 @@ namespace camp.ui
 
         }
 
+        public void OnReloadState(RunInfo runInfo)
+        {
+            Debug.WriteLine($"Process Reload with pid {runInfo.pid} and port {runInfo.port}");
+            PidsLabel.Content = runInfo.pid;
+            PortsLabel.Content = runInfo.port;
+            ModUiControl.ToggleBtn.Style = (Style)Application.Current.FindResource("DangerButton");
+            ModUiControl.ToggleBtn.Text = "Stop";
+
+            ModUiControl.ToggleBtn.IsLoading = false;
+            ModUiControl.ToggleBtn.IsEnabled = true;
+            ModUiControl.AdminBtn.IsEnabled = true;
+
+            if (_ModUiTray != null)
+            {
+                _ModUiTray.AdminBtn.IsEnabled = true;
+                _ModUiTray.ActionBtn.IsEnabled = true;
+                _ModUiTray.ActionBtn.IsLoading = false;
+                _ModUiTray.ActionBtn.Text = "Stop";
+                _ModUiTray.ActionBtn.Style = (Style)Application.Current.FindResource("DangerButton");
+            }
+
+        }
+
+        public void OnErrorPerfomed()
+        {
+
+            PidsLabel.Content = null;
+            PortsLabel.Content = null;
+            ModUiControl.ToggleBtn.Text = "Start";
+            ModUiControl.ToggleBtn.Style = Application.Current.FindResource(typeof(Button)) as Style;
+
+            ModUiControl.ToggleBtn.IsLoading = false;
+            ModUiControl.ToggleBtn.IsEnabled = true;
+            ModUiControl.AdminBtn.IsEnabled = false;
+
+            if (_ModUiTray != null)
+            {
+                _ModUiTray.AdminBtn.IsEnabled = false;
+                _ModUiTray.ActionBtn.IsEnabled = true;
+                _ModUiTray.ActionBtn.IsLoading = false;
+                _ModUiTray.ActionBtn.Text = "Start";
+                _ModUiTray.ActionBtn.Style = Application.Current.FindResource(typeof(Button)) as Style;
+            }
+        }
     }
 
 
@@ -289,10 +333,10 @@ namespace camp.ui
         public ModUiControl()
         {
 
-            ToggleBtn = new LoadingButton() { Text = "Start" }; //{ Content = "Start" };
-            ConfigBth = new Button() { Content = "Config" };
-            AdminBtn = new Button() { Content = "Admin" };
-            LogsBtn = new Button() { Content = "Log" };
+            ToggleBtn = new LoadingButton() { Text = "Start", MinHeight= 25 }; //{ Content = "Start" };
+            ConfigBth = new Button() { Content = "Config", MinHeight = 25 };
+            AdminBtn = new Button() { Content = "Admin", MinHeight = 25 };
+            LogsBtn = new Button() { Content = "Log", MinHeight = 25 };
 
             uIElements = [ToggleBtn, AdminBtn, ConfigBth];
 

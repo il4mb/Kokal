@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:camp"
         mc:Ignorable="d"
-        Title="HelpWindow" Height="450" Width="800">
+        Title="HelpWindow"
+        Icon="{StaticResource ic_conversation}" Height="450" Width="600" ResizeMode="NoResize">
     <Grid Margin="15,15,15,15">
 
         <StackPanel Orientation="Vertical">
@@ -49,19 +49,8 @@
                     </Hyperlink>
                 </TextBlock>
             </Grid>
-            
-        </StackPanel>
 
-        <TextBlock Text="Open Joki Juga Don't Panic" Foreground="Red" FontSize="30" FontWeight="Black" Opacity="0.1" RenderTransformOrigin="0.5,0.5" Width="466" Height="48">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-26.565"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <Image Source="{StaticResource ic_camp_control}" Width="200" Height="200" Opacity="0.1"/>
+        </StackPanel>
+        <Image Source="{StaticResource ic_camp}" Width="200" Height="200" Opacity="0.1"/>
     </Grid>
 </Window>

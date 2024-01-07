@@ -25,12 +25,31 @@ namespace camp
         private const string UniqueMutexName = "CampControl";
 
         /// <summary>The event wait handle.</summary>
-        private EventWaitHandle eventWaitHandle;
+        private EventWaitHandle? eventWaitHandle;
 
         /// <summary>The mutex.</summary>
-        private Mutex mutex;
+        private Mutex? mutex;
 
         #endregion
+
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, ex) =>
+            {
+                Debug.WriteLine(ex.ToString());
+                // Log or handle the exception
+            };
+
+            this.DispatcherUnhandledException += (sender, ex) =>
+            {
+                // Log or handle the exception
+                ex.Handled = true; // Mark the exception as handled to prevent application termination
+            };
+        }
+
 
         #region Methods
 
@@ -73,60 +92,6 @@ namespace camp
             this.Shutdown();
         }
 
-
-
-#if false
-        private static Mutex _mutex = null;
-
-        public App()
-        {
-            const string appName = "CampControl";
-            bool createdNew;
-
-            _mutex = new Mutex(true, appName, out createdNew);
-
-            if (!createdNew)
-            {
-                // Another instance is already running, bring it to the foreground
-                BringRunningInstanceToFront();
-                Shutdown();
-            }
-            else
-            {
-                // Initialize the application
-                InitializeComponent();
-            }
-        }
-
-        private static void BringRunningInstanceToFront()
-        {
-            Process currentProcess = Process.GetCurrentProcess();
-            foreach (Process process in Process.GetProcessesByName(currentProcess.ProcessName))
-            {
-                if (process.Id != currentProcess.Id)
-                {
-
-                    MessageBox.Show("The application is already running. Do you want to bring it to the foreground?", "Application Running");
-
-                    ShowWindow(process.MainWindowHandle, SW_RESTORE);
-                    SetForegroundWindow(process.MainWindowHandle);
-                    break;
-                }
-            }
-        }
-
-        #region Win32 API
-        const int SW_RESTORE = 9;
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-        #endregion
-#endif
 
         public static void OpenEdiText(string filename)
         {
@@ -229,7 +194,8 @@ namespace camp
             return rm.GetObject(imageName) as Bitmap;
 
         }
-
+        
+        #endregion
     }
-    #endregion
+
 }

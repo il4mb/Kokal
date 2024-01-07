@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -24,8 +25,16 @@ namespace camp.lib
         private LogView view;
 
         private readonly string path;
-        private readonly string FilePath;
+        // private string FilePath { get; private set; }
         private readonly string FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+        private readonly Queue<LogEntry> logQueue;
+        private readonly object queueLock = new object();
+        private readonly AutoResetEvent queueSignal = new AutoResetEvent(false);
+        private bool isWriting;
+        private bool isExit = false;
+
+        public string FilePath { get; private set; }
 
 
         public static void WriteLine(string message)
@@ -67,6 +76,22 @@ namespace camp.lib
             {
                 File.Create(FilePath).Close();
             }
+
+            logQueue = new Queue<LogEntry>();
+            isWriting = false;
+
+            // Start a background thread to write to the file
+            Thread writerThread = new Thread(WriteToLogFile);
+            writerThread.IsBackground = true; // Make it a background thread
+            writerThread.Start();
+
+            Application.Current.Exit += (s, e) =>
+            {
+                isExit = true;
+                queueSignal.Set(); // Signal the thread to wake up and check the exit condition
+                writerThread.Join(); // Wait for the thread to finish before the application exits
+            };
+
         }
 
 
@@ -78,11 +103,13 @@ namespace camp.lib
         private void Write(string instance, string message, Code code)
         {
 
-            using StreamWriter sw = new StreamWriter(FilePath, true);
             DateTime dateTime = DateTime.Now;
-            // Write the text to the file
-            sw.WriteLine($"[{code}]\t[{dateTime}]\t[{instance}]\t{message}");
-            sw.Dispose();
+            lock (queueLock)
+            {
+                logQueue.Enqueue(new LogEntry(dateTime, instance, message, code));
+                // Signal the writer thread to process the queue
+                queueSignal.Set();
+            }
 
             view?.WriteToRichEditText(new LogObject()
             {
@@ -91,6 +118,62 @@ namespace camp.lib
                 Instance = instance,
                 Message = message,
             });
+
+        }
+
+        private void WriteToLogFile()
+        {
+
+            while (!isExit)
+            {
+                queueSignal.WaitOne(); // Wait for a signal that the queue has items
+
+                Debug.WriteLine("Is Exit : " + isExit);
+
+                lock (queueLock)
+                {
+                    if (logQueue.Count > 0)
+                    {
+                        isWriting = true;
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(FilePath, true))
+                            {
+                                while (logQueue.Count > 0)
+                                {
+                                    LogEntry logEntry = logQueue.Dequeue();
+
+                                    sw.WriteLine($"[{logEntry.Code}]\t[{logEntry.Datetime}]\t[{logEntry.Instance}]\t{logEntry.Message}");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error writing to log file: {ex.Message}");
+                        }
+                        finally
+                        {
+                            isWriting = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        private class LogEntry
+        {
+            public DateTime Datetime { get; }
+            public string Instance { get; }
+            public string Message { get; }
+            public Code Code { get; }
+
+            public LogEntry(DateTime datetime, string instance, string message, Code code)
+            {
+                Datetime = datetime;
+                Instance = instance;
+                Message = message;
+                Code = code;
+            }
 
         }
     }
@@ -120,7 +203,7 @@ namespace camp.lib
 
             }
 
-            Application.Current.Dispatcher.Invoke(() =>
+            Application.Current?.Dispatcher.Invoke(() =>
             {
 
                 if (Container == null) return;
@@ -193,7 +276,7 @@ namespace camp.lib
                 if (scrollViewer != null)
                 {
                     // Scroll to the bottom
-                    scrollViewer.ScrollToVerticalOffset(scrollViewer.ScrollableHeight+100);
+                    scrollViewer.ScrollToVerticalOffset(scrollViewer.ScrollableHeight + 100);
                 }
             }
         }

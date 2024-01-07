@@ -15,10 +15,16 @@
             <BitmapImage x:Key="ic_menu" UriSource="icon\menu.png"/>
             <BitmapImage x:Key="ic_setting" UriSource="icon\setting.png"/>
             <BitmapImage x:Key="ic_resize" UriSource="icon\resize.png"/>
-            <BitmapImage x:Key="ic_camp_control" UriSource="icon\camp control.png"/>
             <BitmapImage x:Key="ic_apache" UriSource="icon\apache.png"/>
             <BitmapImage x:Key="ic_mysql" UriSource="icon\mysql.png"/>
-
+            <BitmapImage x:Key="ic_icon" UriSource="icon.ico"/>
+            <BitmapImage x:Key="ic_settings" UriSource="icon\settings.png"/>
+            <BitmapImage x:Key="ic_global_network" UriSource="icon\global-network.png"/>
+            <BitmapImage x:Key="ic_folder" UriSource="icon\folder.png"/>
+            <BitmapImage x:Key="ic_conversation" UriSource="icon\conversation.png"/>
+            <BitmapImage x:Key="ic_stop" UriSource="icon\stop.png"/>
+            <BitmapImage x:Key="ic_folder_globe" UriSource="icon\folder-globe.png"/>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

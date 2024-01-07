@@ -28,6 +28,9 @@
                 <Setter Property="Background" Value="DarkGoldenrod"/>
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
         </Style.Triggers>
 
     </Style>
@@ -56,6 +59,9 @@
                 <Setter Property="Background" Value="#FF0077BB"/>
                 <Setter Property="Foreground" Value="#FFF"/>
             </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
         </Style.Triggers>
         
     </Style>
@@ -85,6 +91,9 @@
                 <Setter Property="Background" Value="#FF393939"/>
                 <Setter Property="Foreground" Value="#FFFFFF"/>
             </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 
@@ -112,6 +121,9 @@
                 <Setter Property="Background" Value="#FFB72A2A"/>
                 <Setter Property="Foreground" Value="#FFFFFF"/>
             </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
         </Style.Triggers>
         
     </Style>
@@ -140,6 +152,9 @@
                 <Setter Property="Background" Value="#FF9D9525"/>
                 <Setter Property="Foreground" Value="#FFFFFF"/>
             </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 
@@ -167,8 +182,42 @@
                 <Setter Property="Background" Value="#FF228C90"/>
                 <Setter Property="Foreground" Value="#FFFFFF"/>
             </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
         </Style.Triggers>
         <!-- Add more setters as needed -->
+    </Style>
+
+    <Style x:Key="PrimaryOutlineButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="#007bff"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="#007bff"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#007bff"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
+        </Style.Triggers>
+
     </Style>
 
 </ResourceDictionary>

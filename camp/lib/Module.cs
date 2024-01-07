@@ -19,6 +19,33 @@ namespace camp.lib
         // protected string Version = "";
         private ModulePaths? ModulePaths;
         private IModWatcher? ModWatcher;
+        public RunInfo? LastRunInfo { get; set; }
+
+
+        public Module()
+        {
+            new Thread(async t =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                await Task.Delay(600);
+
+                try
+                {
+
+                    RunInfo? runInfo = await GetRunInfo();
+                    if (runInfo != null && !string.IsNullOrEmpty(runInfo.pid))
+                    {
+                        Log.WriteLine(GetName(), $"Reload to last instance", Code.Warning);
+                        Log.WriteLine(GetName(), $"Process has been started with pid {runInfo.pid}, port {runInfo.port}", Code.Suceess);
+                        Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnReloadState(runInfo));
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.WriteLine(GetName(), e.Message, Code.Danger);
+                }
+            }).Start();
+        }
 
         public abstract string GetName();
 
@@ -64,13 +91,15 @@ namespace camp.lib
                 try
                 {
                     RunInfo? runinfo = await GetRunInfo();
-                    if (runinfo != null && runinfo.pid != null)
+                    if (runinfo != null && !string.IsNullOrEmpty(runinfo.pid))
                     {
+                        Debug.WriteLine("Toggle Stop");
                         Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnStopTrigged()); // Event dispatcher
                         Stop(runinfo);
                     }
                     else
                     {
+                        Debug.WriteLine("Toggle Start");
                         Application.Current.Dispatcher?.Invoke(() => ModWatcher?.OnStartTrigged()); // Event dispatcher
                         Start();
                     }
@@ -86,10 +115,11 @@ namespace camp.lib
             Debug.WriteLine($"Toggle {GetName()}");
         }
 
-
-
         private void Start()
         {
+            Debug.WriteLine("Begin start");
+
+            int error = 0;
 
             new Thread(() =>
             {
@@ -100,16 +130,35 @@ namespace camp.lib
                 proc.StartInfo.Arguments = command;
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.CreateNoWindow = true;
-
                 proc.EnableRaisingEvents = true;
-                proc.Exited += OnProcExited;
+
+                proc.ErrorDataReceived += (s, e) =>
+                {
+                    error++;
+                    Debug.WriteLine("Error : " + e.Data);
+                    if (!string.IsNullOrEmpty(e.Data))
+                    {
+                        Log.WriteLine(GetName(), $"{e.Data}", Code.Danger);
+                    }
+                };
+
+                proc.Exited += (s, e) =>
+                {
+                    if (error == 0) { OnProcExited(s, e); }
+                    else
+                    {
+                        Application.Current?.Dispatcher.Invoke(() => ModWatcher?.OnErrorPerfomed());
+                    }
+                };
 
                 proc.Start();
+                proc.BeginOutputReadLine();
+                proc.BeginErrorReadLine();
+                proc.WaitForExit();
 
             }).Start();
-
-
 
             new Thread(async () =>
             {
@@ -125,6 +174,7 @@ namespace camp.lib
 
                         Log.WriteLine(GetName(), $"Process has been started with pid {runInfo.pid}, port {runInfo.port}", Code.Suceess);
                         Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnStartPerfomed(runInfo)); // Event dispatcher
+                        LastRunInfo = runInfo;
 
                         string[] pids = [runInfo.pid];
                         if (runInfo.pid.Contains(','))
@@ -146,7 +196,6 @@ namespace camp.lib
             }).Start();
 
         }
-
 
         private void Stop(RunInfo runInfo)
         {
@@ -176,7 +225,6 @@ namespace camp.lib
 
         }
 
-
         private void WatchPidToExit(int pid)
         {
 
@@ -185,11 +233,11 @@ namespace camp.lib
             proc.Exited += OnProcExited;
         }
 
-
         private void OnProcExited(object? sender, EventArgs args)
         {
             try
             {
+                LastRunInfo = null;
                 Log.WriteLine(GetName(), $"Process has been stoped", Code.Warning);
                 Application.Current.Dispatcher.Invoke(() => ModWatcher?.OnStopPerfomed()); // Event dispatcher
             }
@@ -199,7 +247,6 @@ namespace camp.lib
             }
         }
 
-
         public async Task Install()
         {
             try
@@ -207,7 +254,7 @@ namespace camp.lib
 
                 Log.WriteLine(GetName(), $"Traying reinstall module...");
 
-                if(!File.Exists(GetModulePaths().Install))
+                if (!File.Exists(GetModulePaths().Install))
                 {
                     throw new Exception($"Cannot find module installer!");
                 }
@@ -306,7 +353,6 @@ namespace camp.lib
             return tcs.Task;
         }
 
-
         static bool IsCalledFromUIThread()
         {
             // Check if the current synchronization context is null or from the UI thread
@@ -374,6 +420,9 @@ namespace camp.lib
         void OnStopTrigged();
         void OnStartPerfomed(RunInfo runInfo);
         void OnStopPerfomed();
+        void OnReloadState(RunInfo runInfo);
+
+        void OnErrorPerfomed();
     }
 
     public interface IModule

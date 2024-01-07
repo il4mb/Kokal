@@ -9,17 +9,24 @@ namespace camp.module
     {
 
         private string access_log, error_log, httpd_conf, php_ini;
+        private static Apache? SelftInstance;
         public Apache()
         {
             access_log = Path.Combine(GetPath(), "logs", "access.log");
             error_log = Path.Combine(GetPath(), "logs", "error.log");
             httpd_conf = Path.Combine(GetPath(), "conf", "httpd.conf");
             php_ini = Path.Combine(Directory.GetCurrentDirectory(), "php", "php.ini");
+            SelftInstance = this;
+        }
+
+        public static Apache? GetInstance()
+        {
+            return SelftInstance;
         }
 
         public override void AdminNavigate()
         {
-            App.OpenBrowser("http://localhost");
+            App.OpenBrowser($"http://localhost{(LastRunInfo != null ? ":"+LastRunInfo.port: "")}");
 
         }
 

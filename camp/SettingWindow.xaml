@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:camp"
         xmlns:lib="clr-namespace:camp.lib" x:Name="window" x:Class="camp.SettingWindow"
+    Icon="{StaticResource ic_settings}"
         mc:Ignorable="d"
         Title="Setting" Height="400" Width="350" ResizeMode="NoResize">
 
@@ -92,7 +93,7 @@
         </ListView>
  
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button x:Name="Button_Reset" Width="70" Margin="15,0,0,0" Style="{StaticResource DangerButton}">Reset</Button>
+            <Button x:Name="Button_Reset" Width="70" Margin="15,0,0,0" Foreground="White" Style="{StaticResource DangerButton}">Reset</Button>
             <Button x:Name="Button_Save" Width="70" Margin="15,0,0,0" Style="{StaticResource PrimaryButton}">Save</Button>
         </StackPanel>
 

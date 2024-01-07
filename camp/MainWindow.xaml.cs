@@ -3,9 +3,9 @@ using camp.ui;
 using Notification.Wpf;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 
 namespace camp
 {
@@ -15,13 +15,14 @@ namespace camp
     public partial class MainWindow : Window, IModContainer
     {
 
-        private static ModContainer ModContainer;
+        private static ModContainer? ModContainer;
 
         public event EventExit Exited;
 
         public string Camp_Title { get; set; } = "Camp Control Panel";
-        public string Camp_Version { get; set; } = "Version 1.0";
-        private bool IsKill = false;
+        public string Camp_Version { get; set; } = "Version " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public string BuildVersion { get; set; } = "Version " + (Assembly.GetExecutingAssembly().GetName().Version.ToString()) + " [Windows 64bit]";
+        private bool shouldClose = false;
 
         NotificationManager notificationManager;
 
@@ -41,11 +42,12 @@ namespace camp
                 ModContainer.InitialModule();
             }
 
+          //  Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose; Application.Current.MainWindow = this;
+
             notificationManager = new NotificationManager();
             Loaded += MainWindow_Loaded;
 
         }
-
 
         public Grid GetParentHolder()
         {
@@ -59,6 +61,10 @@ namespace camp
         }
 
 
+        public void InokeExit()
+        {
+            Exited?.Invoke();
+        }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -66,32 +72,31 @@ namespace camp
         }
 
         // Override the OnStateChanged method to minimize to system tray when the window is minimized
-        protected override void OnStateChanged(EventArgs e)
-        {
-            if (this.WindowState == WindowState.Minimized)
-            {
-                this.Hide();
-            }
-            base.OnStateChanged(e);
-        }
+
 
 
         // Override OnClosing event to prevent the main window from being closed
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
 
-            if (!IsKill)
+            if (!shouldClose)
             {
                 e.Cancel = true;
                 base.OnClosing(e);
                 this.Hide(); // Hide instead of closing
                 NotifyIcon.Visibility = Visibility.Visible;
-                notificationManager.Show("Camp Control Panel", "Enter system tray mode!\nClick here to reopen.", NotificationType.Information, onClick: BringToForeground);
+                notificationManager.Show("Camp Control Panel", "Enter system tray mode!\nClick here to reopen.", NotificationType.Information, onClick: () => BringToForeground(0));
+            } else
+            {
+
+                Debug.WriteLine("Closing is kill");
+                Application.Current.Shutdown();
+
             }
         }
 
         /// <summary>Brings main window to foreground.</summary>
-        public void BringToForeground()
+        public void BringToForeground(int IsFromNewInst = 1)
         {
             NotifyIcon.Visibility = Visibility.Hidden;
 
@@ -106,8 +111,11 @@ namespace camp
             this.Topmost = true;
             this.Topmost = false;
             this.Focus();
+            if (IsFromNewInst == 1)
+            {
+                notificationManager.Show("Camp Control Panel", "The instance is already running, Reloading the previous instance!", NotificationType.Warning);
 
-            notificationManager.Show("Camp Control Panel", "The instance is already running, Reloading the previous instance!", NotificationType.Warning);
+            }
         }
 
 
@@ -148,13 +156,20 @@ namespace camp
         private void Button_Quit_Click(object sender, RoutedEventArgs e)
         {
 
-            new Thread(async t =>
+            Task.Run(async () =>
             {
-                Thread.CurrentThread.IsBackground = true;
+                // Perform any necessary cleanup or asynchronous tasks
                 await Exited.Invoke();
-                IsKill = true;
-                System.Windows.Application.Current.Dispatcher.Invoke(() => System.Windows.Application.Current.Shutdown());
-            }).Start();
+
+                // Set the flag to allow closing
+                shouldClose = true;
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    // Close the application
+                    Application.Current.Shutdown();
+                });
+            });
         }
 
         private void Button_Expand_Click(object sender, RoutedEventArgs e)
@@ -162,6 +177,14 @@ namespace camp
             this.Show();
             NotifyIcon.Visibility = Visibility.Hidden;
             NotifyPopup.IsOpen = false;
+        }
+        
+        private void Button_Support_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new SupportWindow();
+            window.Owner = this;
+            window.DataContext = this.DataContext;
+            window.ShowDialog();
         }
     }
 }
