@@ -7,7 +7,7 @@ Before you start contributing, please take a moment to read and understand our [
 ## Ways to Contribute
 
 1. **Reporting Issues:**
-   - If you encounter a bug or have a feature request, please [open an issue](https://github.com/your-username/your-repo/issues) on our GitHub repository.
+   - If you encounter a bug or have a feature request, please [open an issue](https://github.com/il4mb/camp/issues) on our GitHub repository.
    - Provide a clear and detailed description of the issue or enhancement you are suggesting.
    - Include steps to reproduce for bugs.
 
@@ -40,14 +40,14 @@ Before you start contributing, please take a moment to read and understand our [
 2. **Clone Your Fork:**
    - Clone your fork to your local machine:
      ```
-     git clone https://github.com/your-username/your-repo.git
-     cd your-repo
+     git clone https://github.com/il4mb/camp.git
+     cd camp
      ```
 
 3. **Create a Branch:**
    - Create a new branch for your contribution:
      ```
-     git checkout -b feature/your-feature
+     git checkout -b feature/<your-feature>
      ```
 
 4. **Make Changes:**
@@ -62,7 +62,7 @@ Before you start contributing, please take a moment to read and understand our [
 6. **Push Changes:**
    - Push your changes to your fork:
      ```
-     git push origin feature/your-feature
+     git push origin feature/<your-feature>
      ```
 
 7. **Open a Pull Request:**
