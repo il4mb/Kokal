@@ -1,4 +1,4 @@
-﻿using camp.lib;
+﻿using kokal.lib;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace camp.ui
+namespace kokal.ui
 {
 
     public class ModUi : IModWatcher

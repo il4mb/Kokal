@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace camp.lib
+namespace kokal.lib
 {
 
     public delegate void ModRunListener(RunInfo? runinfo);

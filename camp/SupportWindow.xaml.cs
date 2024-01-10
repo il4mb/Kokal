@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
-namespace camp
+namespace kokal
 {
 
 
@@ -13,7 +13,7 @@ namespace camp
     public partial class SupportWindow : Window
     {
 
-        private const string Url = "https://il4mb.github.io/camp/support/";
+        private const string Url = "https://il4mb.github.io/kokal/support/";
         private bool hasNavigated = false;
         public SupportWindow()
         {

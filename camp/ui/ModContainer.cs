@@ -1,7 +1,7 @@
-﻿using camp.module;
+﻿using kokal.module;
 using System.Windows.Controls;
 
-namespace camp.ui
+namespace kokal.ui
 {
     public delegate Task EventExit();
 

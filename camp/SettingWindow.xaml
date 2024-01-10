@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:camp"
-        xmlns:lib="clr-namespace:camp.lib" x:Name="window" x:Class="camp.SettingWindow"
+        xmlns:local="clr-namespace:kokal"
+        xmlns:lib="clr-namespace:kokal.lib" x:Name="window" x:Class="kokal.SettingWindow"
     Icon="{StaticResource ic_settings}"
         mc:Ignorable="d"
         Title="Setting" Height="400" Width="350" ResizeMode="NoResize">

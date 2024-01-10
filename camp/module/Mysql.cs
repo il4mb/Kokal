@@ -1,9 +1,9 @@
-﻿using camp.lib;
+﻿using kokal.lib;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace camp.module
+namespace kokal.module
 {
     internal class Mysql : Module
     {

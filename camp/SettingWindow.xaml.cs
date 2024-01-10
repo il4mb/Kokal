@@ -1,8 +1,8 @@
-﻿using camp.lib;
+﻿using kokal.lib;
 using Microsoft.Win32;
 using System.Windows;
 
-namespace camp
+namespace kokal
 {
 
     public partial class SettingWindow : Window

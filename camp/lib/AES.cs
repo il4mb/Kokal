@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace camp.lib
+namespace kokal.lib
 {
     class AES
     {

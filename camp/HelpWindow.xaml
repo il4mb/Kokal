@@ -1,4 +1,4 @@
-﻿<Window x:Class="camp.HelpWindow"
+﻿<Window x:Class="kokal.HelpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,14 +10,14 @@
 
         <StackPanel Orientation="Vertical">
             <TextBlock Margin="0,0,0,6">
-                <Run Text="Camp" FontWeight="SemiBold" FontSize="16"/>
+                <Run Text="Kokal" FontWeight="SemiBold" FontSize="16"/>
                 <Run Text="Combine Apache Mysql PHP" FontStyle="Italic"/>
                 <LineBreak/>
                  <Run Text="Version 1.0 [Windows 64bit] 2023"/>
                 <LineBreak/>
                 <TextBlock>
                     <Run Text="Github Project"/>
-                    <Hyperlink NavigateUri="https://github.com/il4mb/camp" RequestNavigate="Hyperlink_RequestNavigate">https://github.com/il4mb/camp</Hyperlink>
+                    <Hyperlink NavigateUri="https://github.com/il4mb/kokal" RequestNavigate="Hyperlink_RequestNavigate">https://github.com/il4mb/kokal</Hyperlink>
                 </TextBlock>
             </TextBlock>
 
@@ -51,6 +51,6 @@
             </Grid>
 
         </StackPanel>
-        <Image Source="{StaticResource ic_camp}" Width="200" Height="200" Opacity="0.1"/>
+        <Image Source="{StaticResource ic_kokal}" Width="200" Height="200" Opacity="0.1"/>
     </Grid>
 </Window>

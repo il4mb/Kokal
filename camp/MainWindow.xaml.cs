@@ -1,5 +1,5 @@
-﻿using camp.lib;
-using camp.ui;
+﻿using kokal.lib;
+using kokal.ui;
 using Notification.Wpf;
 using System.Diagnostics;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace camp
+namespace kokal
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -19,8 +19,8 @@ namespace camp
 
         public event EventExit Exited;
 
-        public string Camp_Title { get; set; } = "Camp Control Panel";
-        public string Camp_Version { get; set; } = "Version " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public string Kokal_Title { get; set; } = "Kokal Control Panel";
+        public string Kokal_Version { get; set; } = "Version " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         public string BuildVersion { get; set; } = "Version " + (Assembly.GetExecutingAssembly().GetName().Version.ToString()) + " [Windows 64bit]";
         private bool shouldClose = false;
 
@@ -34,7 +34,7 @@ namespace camp
             this.DataContext = this;
 
             Log.Current.SetLogView(new LogView(this.LogContainer));
-            Log.WriteLine($"Camp Control Panel {Camp_Version}");
+            Log.WriteLine($"Kokal Control Panel {Kokal_Version}");
 
             if (ModContainer == null)
             {
@@ -85,7 +85,7 @@ namespace camp
                 base.OnClosing(e);
                 this.Hide(); // Hide instead of closing
                 NotifyIcon.Visibility = Visibility.Visible;
-                notificationManager.Show("Camp Control Panel", "Enter system tray mode!\nClick here to reopen.", NotificationType.Information, onClick: () => BringToForeground(0));
+                notificationManager.Show("Kokal Control Panel", "Enter system tray mode!\nClick here to reopen.", NotificationType.Information, onClick: () => BringToForeground(0));
             } else
             {
 
@@ -113,7 +113,7 @@ namespace camp
             this.Focus();
             if (IsFromNewInst == 1)
             {
-                notificationManager.Show("Camp Control Panel", "The instance is already running, Reloading the previous instance!", NotificationType.Warning);
+                notificationManager.Show("Kokal Control Panel", "The instance is already running, Reloading the previous instance!", NotificationType.Warning);
 
             }
         }

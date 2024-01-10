@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace camp.lib
+namespace kokal.lib
 {
     internal class Setting
     {
@@ -50,7 +50,7 @@ namespace camp.lib
 
         public static string GetApplicationDirectory()
         {
-            string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "camp");
+            string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "kokal");
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);

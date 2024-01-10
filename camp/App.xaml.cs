@@ -1,4 +1,4 @@
-﻿using camp.lib;
+﻿using kokal.lib;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Resources;
 using System.Windows;
 
 
-namespace camp
+namespace kokal
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -19,10 +19,10 @@ namespace camp
         #region Constants and Fields
 
         /// <summary>The event mutex name.</summary>
-        private const string UniqueEventName = "CampControlEvt";
+        private const string UniqueEventName = "KokalControlEvt";
 
         /// <summary>The unique mutex name.</summary>
-        private const string UniqueMutexName = "CampControl";
+        private const string UniqueMutexName = "KokalControl";
 
         /// <summary>The event wait handle.</summary>
         private EventWaitHandle? eventWaitHandle;

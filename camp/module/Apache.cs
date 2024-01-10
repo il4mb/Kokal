@@ -1,9 +1,9 @@
-﻿using camp.lib;
+﻿using kokal.lib;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace camp.module
+namespace kokal.module
 {
     public class Apache : lib.Module
     {
@@ -94,7 +94,7 @@ namespace camp.module
             string[] paths = [
                 Path.Combine(GetPath(), "bin", "httpd.exe"),
                 Path.Combine(GetPath(), "conf", "httpd.conf"),
-                Path.Combine(GetPath(), "conf", "extra", "httpd-camp.conf"),
+                Path.Combine(GetPath(), "conf", "extra", "httpd-kokal.conf"),
             ];
 
             foreach (string path in paths)

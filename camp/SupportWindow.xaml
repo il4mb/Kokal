@@ -1,9 +1,9 @@
-﻿<Window x:Class="camp.SupportWindow"
+﻿<Window x:Class="kokal.SupportWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:camp"
+        xmlns:local="clr-namespace:kokal"
         Icon="icon/day.png"
         mc:Ignorable="d"
         Title="SupportWindow" Height="550" Width="400">

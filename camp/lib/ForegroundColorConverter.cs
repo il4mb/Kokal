@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace camp.lib
+namespace kokal.lib
 {
     public class ForegroundColorConverter : IMultiValueConverter
     {

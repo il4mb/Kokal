@@ -6,14 +6,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <StartupObject>camp.App</StartupObject>
+    <StartupObject>kokal.App</StartupObject>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/il4mb/camp</RepositoryUrl>
+    <RepositoryUrl>https://github.com/il4mb/kokal</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>camp.png</PackageIcon>
-    <PackageProjectUrl>https://il4mb.github,io/camp</PackageProjectUrl>
+    <PackageIcon>kokal.png</PackageIcon>
+    <PackageProjectUrl>https://il4mb.github,io/kokal</PackageProjectUrl>
     <AssemblyVersion>1.1.2.0</AssemblyVersion>
     <FileVersion>1.1.2.0</FileVersion>
     <UseWindowsForms>False</UseWindowsForms>
@@ -21,13 +21,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="camp control.ico" />
-    <None Remove="camp.ico" />
+    <None Remove="kokal control.ico" />
+    <None Remove="kokal.ico" />
     <None Remove="icon.ico" />
     <None Remove="icon\apache.png" />
     <None Remove="icon\apache.svg" />
     <None Remove="icon\bmc_qr.png" />
-    <None Remove="icon\camp control.png" />
+    <None Remove="icon\kokal control.png" />
     <None Remove="icon\conversation.png" />
     <None Remove="icon\day.png" />
     <None Remove="icon\folder-globe.png" />
@@ -40,11 +40,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="F:\camp\LICENSE.txt">
+    <None Include="F:\kokal\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="F:\camp\README.md">
+    <None Include="F:\kokal\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -81,7 +81,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="camp.ico">
+    <Resource Include="kokal.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon.ico">
@@ -94,7 +94,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
 	  
-    <Resource Include="icon\camp.png">
+    <Resource Include="icon\kokal.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
 	  
@@ -122,7 +122,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="icon\camp.png">
+    <None Update="icon\kokal.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

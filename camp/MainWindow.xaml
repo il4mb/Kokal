@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf" 
-        xmlns:local="clr-namespace:camp.lib"
-        x:Class="camp.MainWindow"
+        xmlns:local="clr-namespace:kokal.lib"
+        x:Class="kokal.MainWindow"
         mc:Ignorable="d"
         Icon="{StaticResource ic_icon}"
-        Title="Camp Control Panel" 
+        Title="KoKal Control Panel" 
         MinHeight="400" 
         MinWidth="750" 
         Height="450" 
@@ -177,14 +177,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Column="0" Source="camp.ico" Width="65" Height="55" RenderTransformOrigin="0.5,0.531"/>
+            <Image Grid.Column="0" Source="kokal.ico" Width="65" Height="55" RenderTransformOrigin="0.5,0.531"/>
 
             <RichTextBox Margin="10,10,0,0" BorderBrush="Transparent" Background="Transparent" Grid.Column="1" IsEnabled="False">
                 <RichTextBox.Document>
                     <FlowDocument>
                         <Paragraph>
                             <Bold>
-                                <Run FontSize="18" Text="Camp Control Panel"/>
+                                <Run FontSize="18" Text="Kokal Control Panel"/>
                             </Bold>
                             <LineBreak/>
                             <Run Text="{Binding BuildVersion}"/>
@@ -257,7 +257,7 @@
         <!-- Block NotifyIcon -->
         <tb:TaskbarIcon x:Name="NotifyIcon"
                         IconSource="icon.ico"
-                        ToolTipText="Camp Control"
+                        ToolTipText="Kokal Control"
                         PopupActivation="All" 
                         Visibility="Visible">
 
@@ -277,7 +277,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Column="0" Source="icon.ico" Width="16" Height="16"/>
-                                <TextBlock Grid.Column="1" Margin="5,7,0,0" Text="Camp Mini Control" FontSize="14" FontWeight="SemiBold"/>
+                                <TextBlock Grid.Column="1" Margin="5,7,0,0" Text="Kokal Mini Control" FontSize="14" FontWeight="SemiBold"/>
 
                                 <Button Grid.Column="2" Background="#eaeaea" BorderBrush="#999999f9" 
                                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="30" Height="21"

@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace camp
+namespace kokal
 {
     /// <summary>
     /// Interaction logic for HelpWindow.xaml

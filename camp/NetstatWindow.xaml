@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:camp"
-        xmlns:lib="clr-namespace:camp.lib" 
-        x:Name="window" x:Class="camp.NetstatWindow"
+        xmlns:local="clr-namespace:kokal"
+        xmlns:lib="clr-namespace:kokal.lib" 
+        x:Name="window" x:Class="kokal.NetstatWindow"
     Icon="{StaticResource ic_global_network}"
         mc:Ignorable="d"
         Title="Netstat" Height="600" Width="600" SizeToContent="Width" ResizeMode="NoResize">
