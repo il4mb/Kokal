@@ -1,6 +1,6 @@
-# Camp Project Code of Conduct
+# Kokal Project Code of Conduct
 
-Welcome to the Camp Project! We are excited to have you as a part of our community. To ensure a positive and inclusive experience for everyone, we have established this Code of Conduct that applies to all participants, contributors, and community members.
+Welcome to the Kokal Project! We are excited to have you as a part of our community. To ensure a positive and inclusive experience for everyone, we have established this Code of Conduct that applies to all participants, contributors, and community members.
 
 ## Our Values
 
@@ -44,7 +44,7 @@ The following behaviors are considered unacceptable and will not be tolerated:
 
 ## Reporting Violations
 
-If you experience or witness any behavior that violates this Code of Conduct, please report it to the project maintainers at [contact@example.com]. All reports will be kept confidential, and appropriate action will be taken to address the issue.
+If you experience or witness any behavior that violates this Code of Conduct, please report it to the project maintainers at [durianbohong@gmail.com]. All reports will be kept confidential, and appropriate action will be taken to address the issue.
 
 ## Enforcement
 
