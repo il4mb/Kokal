@@ -6,7 +6,7 @@ Welcome to the Camp Project - a free and open-source software similar to XAMPP! 
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-blue)](https://www.buymeacoffee.com/il4mb)
 
-[![](https://img.shields.io/github/downloads-pre/il4mb/camp/1.1.2.0/total?style=social)](https://github.com/il4mb/camp/releases/latest)
+[![](https://img.shields.io/github/downloads-pre/il4mb/camp/latest/total?style=social)](https://github.com/il4mb/camp/releases/latest)
 
 ## Features
 
