@@ -2,7 +2,7 @@
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-blue)](https://www.buymeacoffee.com/il4mb) [![](https://img.shields.io/github/downloads-pre/il4mb/camp/latest/total?style=social)](https://github.com/il4mb/camp/releases/latest)
 
-Kokal is Kontrol lokal x Apache + Mysql + PHP
+Kokal is Kontrol Lokal x Apache + Mysql + PHP
 
 Welcome to the Kokal Project - a free and open-source software similar to XAMPP! This project aims to provide a convenient and easy-to-use environment for local development, allowing users to set up a web server, database, and other related tools effortlessly.
 
