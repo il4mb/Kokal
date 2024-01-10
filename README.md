@@ -1,10 +1,10 @@
-# Camp Project
+# Kokal Project
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-blue)](https://www.buymeacoffee.com/il4mb) [![](https://img.shields.io/github/downloads-pre/il4mb/camp/latest/total?style=social)](https://github.com/il4mb/camp/releases/latest)
 
-Camp is Combine Apache + Mysql + PHP
+Kokal is Kontrol lokal x Apache + Mysql + PHP
 
-Welcome to the Camp Project - a free and open-source software similar to XAMPP! This project aims to provide a convenient and easy-to-use environment for local development, allowing users to set up a web server, database, and other related tools effortlessly.
+Welcome to the Kokal Project - a free and open-source software similar to XAMPP! This project aims to provide a convenient and easy-to-use environment for local development, allowing users to set up a web server, database, and other related tools effortlessly.
 
 
 
@@ -20,7 +20,7 @@ We welcome contributions from the community! Please read our [Contribution Guide
 
 ## Bug Reports and Feature Requests
 
-If you encounter any issues or have ideas for improvements, please [open an issue](https://github.com/il4mb/camp/issues).
+If you encounter any issues or have ideas for improvements, please [open an issue](https://github.com/il4mb/kokal/issues).
 
 ## Code of Conduct
 
@@ -28,7 +28,7 @@ Please note that this project is released with a [Code of Conduct](CODE_OF_CONDU
 
 ## License
 
-This project is licensed under the [Your License] - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the [] - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 
