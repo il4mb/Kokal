@@ -5,10 +5,12 @@ using System.Text.Json;
 
 namespace kokal.lib
 {
+
+
+   
     internal class Setting
     {
 
-        
         private static Setting? instance;
         private AES aes;
 

@@ -9,7 +9,7 @@
         x:Class="kokal.MainWindow"
         mc:Ignorable="d"
         Icon="{StaticResource ic_icon}"
-        Title="KoKal Control Panel" 
+        Title="{DynamicResource title}" 
         MinHeight="400" 
         MinWidth="750" 
         Height="450" 
@@ -58,7 +58,7 @@
                                 <ImageBrush ImageSource="icon/settings.png"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <Label Grid.Column="1" Foreground="white" Content="Setting"/>
+                        <Label Grid.Column="1" Foreground="white" Content="{DynamicResource setting}"/>
                     </Grid>
                 </Button.Content>
 
@@ -80,7 +80,7 @@
                                 <ImageBrush ImageSource="icon/global-network.png"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <Label Grid.Column="1" Foreground="white" Content="Netstat"/>
+                        <Label Grid.Column="1" Foreground="white" Content="{DynamicResource netstat}"/>
                     </Grid>
                 </Button.Content>
 
@@ -100,7 +100,7 @@
                                 <ImageBrush ImageSource="icon/folder.png"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <Label Grid.Column="1" Foreground="White" Content="Explorer"/>
+                        <Label Grid.Column="1" Foreground="White" Content="{DynamicResource explorer}"/>
                     </Grid>
                 </Button.Content>
             </Button>
@@ -140,7 +140,7 @@
                                 <ImageBrush ImageSource="icon/conversation.png"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <Label Grid.Column="1" Foreground="White" Content="Help"/>
+                        <Label Grid.Column="1" Foreground="White" Content="{DynamicResource help}"/>
                     </Grid>
                 </Button.Content>
             </Button>
@@ -159,7 +159,7 @@
                                 <ImageBrush ImageSource="icon/stop.png"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <Label Grid.Column="1" Foreground="White" Content="Exit"/>
+                        <Label Grid.Column="1" Foreground="White" Content="{DynamicResource exit}"/>
                     </Grid>
                 </Button.Content>
             </Button>
@@ -184,9 +184,11 @@
                     <FlowDocument>
                         <Paragraph>
                             <Bold>
-                                <Run FontSize="18" Text="Kokal"/>
-                                <Italic>Kontrol Lokal</Italic>
+                                <Run FontSize="18" Text="{DynamicResource title}"/>
                             </Bold>
+                            <Italic>
+                                <Run Text="{DynamicResource sub-title}"/>
+                            </Italic>
                             <LineBreak/>
                             <Run Text="{Binding BuildVersion}"/>
                         </Paragraph>
@@ -215,7 +217,7 @@
                                 <ImageBrush ImageSource="icon/day.png"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
-                        <Label Grid.Column="1" Foreground="{Binding Foreground, ElementName=SupportBtn}" Content="Support"/>
+                        <Label Grid.Column="1" Foreground="{Binding Foreground, ElementName=SupportBtn}" Content="{DynamicResource support}"/>
                     </Grid>
                 </Button.Content>
             </Button>
@@ -239,10 +241,10 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Content="" FontWeight="Bold" Margin="0,0,0,5"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="Module" FontWeight="Bold" Margin="0,0,0,5"/>
-                <Label Grid.Row="0" Grid.Column="2" Content="Pdi's" FontWeight="Bold" Margin="0,0,0,5"/>
-                <Label Grid.Row="0" Grid.Column="3" Content="Port's" FontWeight="Bold" Margin="0,0,0,5" HorizontalAlignment="Right"/>
-                <Label Grid.Row="0" Grid.Column="4" Content="Action" FontWeight="Bold" Margin="0,0,0,5"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource module}" FontWeight="Bold" Margin="0,0,0,5"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource pids}" FontWeight="Bold" Margin="0,0,0,5"/>
+                <Label Grid.Row="0" Grid.Column="3" Content="{DynamicResource ports}" FontWeight="Bold" Margin="0,0,0,5" HorizontalAlignment="Right"/>
+                <Label Grid.Row="0" Grid.Column="4" Content="{DynamicResource action}" FontWeight="Bold" Margin="0,0,0,5"/>
 
             </Grid>
 
@@ -258,7 +260,7 @@
         <!-- Block NotifyIcon -->
         <tb:TaskbarIcon x:Name="NotifyIcon"
                         IconSource="icon.ico"
-                        ToolTipText="Kokal Control"
+                        ToolTipText="{DynamicResource tray-tooltip}"
                         PopupActivation="All" 
                         Visibility="Visible">
 
@@ -278,11 +280,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Column="0" Source="icon.ico" Width="16" Height="16"/>
-                                <TextBlock Grid.Column="1" Margin="5,7,0,0" Text="Kokal Mini Control" FontSize="14" FontWeight="SemiBold"/>
+                                <TextBlock Grid.Column="1" Margin="5,7,0,0" Text="{DynamicResource tray-sub-title}" FontSize="14" FontWeight="SemiBold"/>
 
                                 <Button Grid.Column="2" Background="#eaeaea" BorderBrush="#999999f9" 
                                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="30" Height="21"
-                                        Click="Button_Expand_Click">
+                                        Click="Button_Expand_Click" ToolTip="{DynamicResource tray-expand}">
                                     <Button.Content>
                                         <StackPanel>
                                             <Image Source="{StaticResource ic_resize}" Width="15" Height="15" RenderTransformOrigin="0.5,0.5">
@@ -297,7 +299,6 @@
                                             </Image>
                                         </StackPanel>
                                     </Button.Content>
-                                    <Button.ToolTip>Expand</Button.ToolTip>
                                 </Button>
                             </Grid>
 
@@ -313,8 +314,8 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <Label Content="Module" FontWeight="SemiBold"/>
-                                <Label Grid.Column="1" Content="Action" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                                <Label Content="{DynamicResource module}" FontWeight="SemiBold"/>
+                                <Label Grid.Column="1" Content="{DynamicResource action}" HorizontalAlignment="Center" FontWeight="SemiBold"/>
 
                             </Grid>
 

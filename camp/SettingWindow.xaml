@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kokal"
         xmlns:lib="clr-namespace:kokal.lib" x:Name="window" x:Class="kokal.SettingWindow"
-    Icon="{StaticResource ic_settings}"
+        Icon="{StaticResource ic_settings}"
         mc:Ignorable="d"
-        Title="Setting" Height="400" Width="350" ResizeMode="NoResize">
+        Title="{DynamicResource setting}" Height="400" Width="350" ResizeMode="NoResize">
 
     <Grid Margin="15,10,15,10">
         <Grid.ColumnDefinitions>
@@ -43,6 +43,30 @@
 
             <ListViewItem HorizontalContentAlignment="Stretch" Margin="0,0,0,5" Focusable="False">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="Label_Language" Content="{DynamicResource language}"/>
+
+                    <ComboBox Grid.Column="1" Name="CmbLanguage">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Icon}" Width="16" Height="16" Margin="0,2,5,2" />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                </Grid>
+            </ListViewItem>
+            
+            
+            <ListViewItem HorizontalContentAlignment="Stretch" Margin="0,0,0,5" Focusable="False">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -62,7 +86,7 @@
                         </StackPanel>
                     </Button>
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="8" Padding="8,0,0,0" MaxWidth="260" Text="Select an executable application that supports text editing to use to edit text if needed." TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="8" Padding="8,0,0,0" MaxWidth="260" Text="{DynamicResource setting-texteditor-help}" TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
                 </Grid>
             </ListViewItem>
 
@@ -87,14 +111,14 @@
                         </StackPanel>
                     </Button>
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="8" Padding="8,0,0,0" MaxWidth="260" Text="If blank, it will use the system default" TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="8" Padding="8,0,0,0" MaxWidth="260" Text="{DynamicResource setting-browser-help}" TextWrapping="Wrap" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
                 </Grid>
             </ListViewItem>
         </ListView>
  
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button x:Name="Button_Reset" Width="70" Margin="15,0,0,0" Foreground="White" Style="{StaticResource DangerButton}">Reset</Button>
-            <Button x:Name="Button_Save" Width="70" Margin="15,0,0,0" Style="{StaticResource PrimaryButton}">Save</Button>
+            <Button x:Name="Button_Reset" Width="70" Margin="15,0,0,0" Foreground="White" Style="{StaticResource DangerButton}" Content="{DynamicResource reset}"/>
+            <Button x:Name="Button_Save" Width="70" Margin="15,0,0,0" Style="{StaticResource PrimaryButton}" Content="{DynamicResource save}"/>
         </StackPanel>
 
     </Grid>

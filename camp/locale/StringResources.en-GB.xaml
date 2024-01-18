@@ -2,15 +2,29 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="title">Kokal</system:String>
+    <system:String x:Key="app">KoKal</system:String>
+    <system:String x:Key="title">Kontrol Lokal</system:String>
     <system:String x:Key="sub-title">Kokal is a Local Control</system:String>
 
+    <system:String x:Key="tray-title">KoKal</system:String>
+    <system:String x:Key="tray-tooltip">KoKal Tray</system:String>
+    <system:String x:Key="tray-sub-title">Kokal Mini Control</system:String>
+    <system:String x:Key="tray-expand">Expand</system:String>
+
+    <system:String x:Key="tray-enter-msg">"Enter system tray mode!
+        Click here to reopen."</system:String>
+
+
+    <system:String x:Key="language">Language</system:String>
+    
     <system:String x:Key="start">Start</system:String>
     <system:String x:Key="stop">Stop</system:String>
     
     <system:String x:Key="module">Module</system:String>
     <system:String x:Key="pid">Pid</system:String>
+    <system:String x:Key="pids">Pid's</system:String>
     <system:String x:Key="port">Port</system:String>
+    <system:String x:Key="ports">Port's</system:String>
     <system:String x:Key="action">Action</system:String>
     
     <system:String x:Key="support">Support</system:String>
@@ -19,7 +33,10 @@
     <system:String x:Key="explorer">Explorer</system:String>
     <system:String x:Key="help">Help</system:String>
     <system:String x:Key="exit">Exit</system:String>
-    
+
+    <system:String x:Key="config">Config</system:String>
+
+
     <system:String x:Key="save">Save</system:String>
     <system:String x:Key="reset">Reset</system:String>
 

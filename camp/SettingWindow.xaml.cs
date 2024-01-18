@@ -1,23 +1,54 @@
 ﻿using kokal.lib;
 using Microsoft.Win32;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace kokal
 {
 
+    public delegate void LanguageChangedEvent();
+
     public partial class SettingWindow : Window
     {
 
+        public static event LanguageChangedEvent LanguageChanged;
+
         string set_editor = "";
         string set_browser = "";
+        string set_lang = "";
 
         public SettingWindow()
         {
-
             InitializeComponent();
+
+
+            List<AppLang> languanges = [
+                new()
+                {
+                    Name = "ID - Indonesia",
+                    Icon = (BitmapImage)App.Current.FindResource("ic_flag_id"),
+                    Code = "id-ID"
+                },
+                new()
+                {
+                    Name = "EN - English",
+                    Icon = (BitmapImage)App.Current.FindResource("ic_flag_gb"),
+                    Code = "en-GB"
+                }
+             ];
+
+            CmbLanguage.ItemsSource = languanges;
+            CmbLanguage.SelectedIndex = 0;
+            CmbLanguage.SelectionChanged += (s, e) =>
+            {
+                set_lang = languanges[CmbLanguage.SelectedIndex].Code;
+                
+            };
+
             LoadLastSetting();
             InitialViewComponent();
-
         }
 
 
@@ -26,6 +57,9 @@ namespace kokal
 
             Setting.Set(SettingHelper.EDITOR, set_editor);
             Setting.Set(SettingHelper.BROWSER, set_browser);
+            Setting.Set(SettingHelper.LANG, set_lang);
+
+            App.SetLanguage(set_lang);
 
         }
 
@@ -33,6 +67,7 @@ namespace kokal
         {
             set_editor = Setting.Get(SettingHelper.EDITOR) ?? "";
             set_browser = Setting.Get(SettingHelper.BROWSER) ?? "";
+            set_lang = Setting.Get(SettingHelper.LANG) ?? "id-ID";
 
             if (string.IsNullOrEmpty(set_editor))
             {
@@ -47,22 +82,26 @@ namespace kokal
 
         private void InitialViewComponent()
         {
-            this.Button_Reset.Click += (s, e) => {
+            this.Button_Reset.Click += (s, e) =>
+            {
 
                 Setting.Set(SettingHelper.EDITOR, "notepad");
                 Setting.Set(SettingHelper.BROWSER, "");
-           
+
                 LoadLastSetting();
             };
-            this.Button_Save.Click += (s, e) => {
+            this.Button_Save.Click += (s, e) =>
+            {
                 SaveSetting();
             };
 
-            this.Button_TextEditor.Click += (s, e) => Select_Executeable(p => {
+            this.Button_TextEditor.Click += (s, e) => Select_Executeable(p =>
+            {
                 set_editor = p;
                 RenderViewValue();
             });
-            this.Button_Browser.Click += (s, e) => Select_Executeable(p => {
+            this.Button_Browser.Click += (s, e) => Select_Executeable(p =>
+            {
                 set_browser = p;
                 RenderViewValue();
             });
@@ -80,6 +119,14 @@ namespace kokal
 
             this.TextBox_TextEditor.Text = textEditor;
             this.TextBox_Browser.Text = browser;
+
+            switch (set_lang)
+            {
+                case "id-ID":
+                    this.CmbLanguage.SelectedIndex = 0; break;
+                case "en-GB":
+                    this.CmbLanguage.SelectedIndex = 1; break;
+            }
         }
 
         private void Select_Executeable(EventPickFile eventPick)
@@ -122,6 +169,14 @@ namespace kokal
             }
         }
 
+    }
+
+
+    public class AppLang
+    {
+        public required string Name { get; set; }
+        public required BitmapImage Icon { get; set; }
+        public required string Code { get; set; }
     }
 
 

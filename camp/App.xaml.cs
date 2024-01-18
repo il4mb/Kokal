@@ -1,6 +1,7 @@
 ﻿using kokal.lib;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Resources;
@@ -16,6 +17,8 @@ namespace kokal
 
     public partial class App : Application
     {
+
+
         #region Constants and Fields
 
         /// <summary>The event mutex name.</summary>
@@ -36,6 +39,9 @@ namespace kokal
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            string? lang = Setting.Get(SettingHelper.LANG);
+            SetLanguage(lang ?? "id-ID");
 
             AppDomain.CurrentDomain.UnhandledException += (sender, ex) =>
             {
@@ -94,22 +100,38 @@ namespace kokal
 
 
 
-        private void SetLanguageDictionary()
+        public static void SetLanguageDictionary()
         {
             ResourceDictionary dict = new ResourceDictionary();
             switch (Thread.CurrentThread.CurrentCulture.ToString())
             {
                 case "en-US":
-                    dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    dict.Source = new Uri(".\\locale\\StringResources.xaml", UriKind.Relative);
                     break;
-                case "fr-CA":
-                    dict.Source = new Uri("..\\Resources\\StringResources.fr-CA.xaml", UriKind.Relative);
+                case "id-ID":
+                    dict.Source = new Uri(".\\locale\\StringResources.id-ID.xaml", UriKind.Relative);
                     break;
                 default:
-                    dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    dict.Source = new Uri(".\\locale\\StringResources.xaml", UriKind.Relative);
                     break;
             }
-            this.Resources.MergedDictionaries.Add(dict);
+            App.Current.Resources.MergedDictionaries.Add(dict);
+        }
+
+        public static void SetLanguage(string languageCode)
+        {
+            // Create a new CultureInfo based on the language code
+            CultureInfo cultureInfo = new CultureInfo(languageCode);
+
+            // Set the current culture for the entire application
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+            // Find and update the ResourceDictionary with the desired language
+            var stringResources = Application.Current.Resources.MergedDictionaries[1]; // Assuming it's the second dictionary
+
+            // Change the source dynamically
+            stringResources.Source = new Uri($"locale/StringResources.{languageCode}.xaml", UriKind.Relative);
         }
 
 

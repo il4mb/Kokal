@@ -230,7 +230,7 @@ namespace kokal.ui
             PidsLabel.Content = runInfo.pid;
             PortsLabel.Content = runInfo.port;
             ModUiControl.ToggleBtn.Style = (Style)Application.Current.FindResource("DangerButton");
-            ModUiControl.ToggleBtn.Text = "Stop";
+            ModUiControl.ToggleBtn.Text = (string)App.Current.FindResource("stop");
 
             ModUiControl.ToggleBtn.IsLoading = false;
             ModUiControl.ToggleBtn.IsEnabled = true;
@@ -241,7 +241,7 @@ namespace kokal.ui
                 _ModUiTray.AdminBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsLoading = false;
-                _ModUiTray.ActionBtn.Text = "Stop";
+                _ModUiTray.ActionBtn.Text = (string)App.Current.FindResource("stop");
                 _ModUiTray.ActionBtn.Style = (Style)Application.Current.FindResource("DangerButton");
             }
 
@@ -253,7 +253,7 @@ namespace kokal.ui
             Debug.WriteLine($"Process has been stoped");
             PidsLabel.Content = null;
             PortsLabel.Content = null;
-            ModUiControl.ToggleBtn.Text = "Start";
+            ModUiControl.ToggleBtn.Text = (string)App.Current.FindResource("start");
             ModUiControl.ToggleBtn.Style = Application.Current.FindResource(typeof(Button)) as Style;
 
             ModUiControl.ToggleBtn.IsLoading = false;
@@ -265,7 +265,7 @@ namespace kokal.ui
                 _ModUiTray.AdminBtn.IsEnabled = false;
                 _ModUiTray.ActionBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsLoading = false;
-                _ModUiTray.ActionBtn.Text = "Start";
+                _ModUiTray.ActionBtn.Text = (string)App.Current.FindResource("start");
                 _ModUiTray.ActionBtn.Style = Application.Current.FindResource(typeof(Button)) as Style;
             }
 
@@ -277,7 +277,7 @@ namespace kokal.ui
             PidsLabel.Content = runInfo.pid;
             PortsLabel.Content = runInfo.port;
             ModUiControl.ToggleBtn.Style = (Style)Application.Current.FindResource("DangerButton");
-            ModUiControl.ToggleBtn.Text = "Stop";
+            ModUiControl.ToggleBtn.Text = (string)App.Current.FindResource("stop");
 
             ModUiControl.ToggleBtn.IsLoading = false;
             ModUiControl.ToggleBtn.IsEnabled = true;
@@ -288,7 +288,7 @@ namespace kokal.ui
                 _ModUiTray.AdminBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsLoading = false;
-                _ModUiTray.ActionBtn.Text = "Stop";
+                _ModUiTray.ActionBtn.Text = (string)App.Current.FindResource("stop");
                 _ModUiTray.ActionBtn.Style = (Style)Application.Current.FindResource("DangerButton");
             }
 
@@ -299,7 +299,7 @@ namespace kokal.ui
 
             PidsLabel.Content = null;
             PortsLabel.Content = null;
-            ModUiControl.ToggleBtn.Text = "Start";
+            ModUiControl.ToggleBtn.Text = (string)App.Current.FindResource("start");
             ModUiControl.ToggleBtn.Style = Application.Current.FindResource(typeof(Button)) as Style;
 
             ModUiControl.ToggleBtn.IsLoading = false;
@@ -311,7 +311,7 @@ namespace kokal.ui
                 _ModUiTray.AdminBtn.IsEnabled = false;
                 _ModUiTray.ActionBtn.IsEnabled = true;
                 _ModUiTray.ActionBtn.IsLoading = false;
-                _ModUiTray.ActionBtn.Text = "Start";
+                _ModUiTray.ActionBtn.Text = (string)App.Current.FindResource("start");
                 _ModUiTray.ActionBtn.Style = Application.Current.FindResource(typeof(Button)) as Style;
             }
         }
@@ -333,8 +333,8 @@ namespace kokal.ui
         public ModUiControl()
         {
 
-            ToggleBtn = new LoadingButton() { Text = "Start", MinHeight= 25 }; //{ Content = "Start" };
-            ConfigBth = new Button() { Content = "Config", MinHeight = 25 };
+            ToggleBtn = new LoadingButton() { Text = (string)App.Current.FindResource("start"), MinHeight = 25 }; //{ Content = "Start" };
+            ConfigBth = new Button() { Content = (string)App.Current.FindResource("config"), MinHeight = 25 };
             AdminBtn = new Button() { Content = "Admin", MinHeight = 25 };
             LogsBtn = new Button() { Content = "Log", MinHeight = 25 };
 

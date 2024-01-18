@@ -85,7 +85,7 @@ namespace kokal
                 base.OnClosing(e);
                 this.Hide(); // Hide instead of closing
                 NotifyIcon.Visibility = Visibility.Visible;
-                notificationManager.Show("Kokal Control Panel", "Enter system tray mode!\nClick here to reopen.", NotificationType.Information, onClick: () => BringToForeground(0));
+                notificationManager.Show("Kokal Control Panel", (string)FindResource("tray-enter-msg"), NotificationType.Information, onClick: () => BringToForeground(0));
             } else
             {
 

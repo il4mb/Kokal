@@ -5,8 +5,10 @@
              Startup="AppOnStartup">
     <Application.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ButtonStyles.xaml"/>
+                <ResourceDictionary Source="locale\StringResources.en-GB.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BitmapImage x:Key="ic_archive" UriSource="icon\archive.png"/>
@@ -24,6 +26,9 @@
             <BitmapImage x:Key="ic_conversation" UriSource="icon\conversation.png"/>
             <BitmapImage x:Key="ic_stop" UriSource="icon\stop.png"/>
             <BitmapImage x:Key="ic_folder_globe" UriSource="icon\folder-globe.png"/>
+
+            <BitmapImage x:Key="ic_flag_gb" UriSource="icon\England-Flag-icon.png"/>
+            <BitmapImage x:Key="ic_flag_id" UriSource="icon\Indonesia-Flag-icon.png"/>
             
         </ResourceDictionary>
     </Application.Resources>
