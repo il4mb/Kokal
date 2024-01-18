@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="title">Kokal</system:String>
+    <system:String x:Key="sub-title">Kokal adalah Kontrol Lokal</system:String>
+
+    <system:String x:Key="start">Mulai</system:String>
+    <system:String x:Key="stop">Berhenti</system:String>
+
+    <system:String x:Key="module">Modul</system:String>
+    <system:String x:Key="pid">Pid</system:String>
+    <system:String x:Key="port">Port</system:String>
+    <system:String x:Key="action">Aksi</system:String>
+
+    <system:String x:Key="support">Dukungan</system:String>
+    <system:String x:Key="setting">Pengaturan</system:String>
+    <system:String x:Key="netstat">Netstat</system:String>
+    <system:String x:Key="explorer">Penjelajah</system:String>
+    <system:String x:Key="help">Bantuan</system:String>
+    <system:String x:Key="exit">Keluar</system:String>
+
+    <system:String x:Key="save">Simpan</system:String>
+    <system:String x:Key="reset">Reset</system:String>
+
+    <system:String x:Key="setting-texteditor-help">Pilih aplikasi eksekutif yang mendukung pengeditan teks untuk digunakan dalam mengedit teks jika diperlukan.</system:String>
+    <system:String x:Key="setting-browser-help">Jika kosong, akan menggunakan default sistem</system:String>
+
+    <system:String x:Key="window">Jendela</system:String>
+
+</ResourceDictionary>

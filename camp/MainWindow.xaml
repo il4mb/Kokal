@@ -169,7 +169,7 @@
         <!-- Block App -->
         <Grid Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -184,7 +184,8 @@
                     <FlowDocument>
                         <Paragraph>
                             <Bold>
-                                <Run FontSize="18" Text="Kokal Control Panel"/>
+                                <Run FontSize="18" Text="Kokal"/>
+                                <Italic>Kontrol Lokal</Italic>
                             </Bold>
                             <LineBreak/>
                             <Run Text="{Binding BuildVersion}"/>
